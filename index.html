@@ -77,8 +77,8 @@ document.getElementById('adminArea').innerHTML=html;
 // Bind edit buttons AFTER rendering them into the DOM
 document.querySelectorAll('.edit-product-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    const id=Number(btn.getAttribute('data-product-id'));
-    const product=(products||[]).find(p=>Number(p.id)===id);
+    const id=btn.getAttribute('data-product-id');
+    const product=(products||[]).find(p=>String(p.id)===String(id));
     if(product) openEditProduct(product);
     else alert('Product नहीं मिला। Dashboard refresh करके फिर कोशिश करें।');
   });
