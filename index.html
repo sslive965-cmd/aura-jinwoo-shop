@@ -69,7 +69,17 @@ window.adminProducts=Object.fromEntries((products||[]).map(p=>[p.id,p]));
 let html=`<p class="success">Admin verified: ${escapeHtml(u.email)}</p><h3>Orders</h3>`;
 html += orders.length?orders.map(o=>`<div class="order"><b>${escapeHtml(o.products?.name||'Product')}</b> — ₹${o.products?.price||''}<br><span class="pill">${escapeHtml(o.status)}</span><br>Customer: ${escapeHtml(o.profiles?.email||'')}<br>UTR: <b>${escapeHtml(o.utr)}</b><br><small>${new Date(o.created_at).toLocaleString()}</small><div style="margin-top:8px"><button class="secondary" onclick="setStatus('${o.id}','verified')">Payment Verified</button><button class="secondary" onclick="setStatus('${o.id}','rejected')">Reject</button><button class="secondary" onclick="deliverOrder('${o.id}')">Delivered</button></div></div>`).join(''):'<p class="note">No orders.</p>';
 html += '<hr><h3>Products</h3>';
-html += products.length?products.map(p=>`<div class="order"><b>${escapeHtml(p.name)}</b> — ₹${p.price} <span class="pill">${p.active?'visible':'hidden'}</span><br><small>${escapeHtml(p.description||'')}</small><button type="button" class="secondary edit-product-btn" data-product-id="${p.id}" onclick="openEditProductById(this.dataset.productId)">✏️ Edit Product</button></div>`).join(''):'<p class="note">No products.</p>';
+html += products.length?products.map(p=>`<div class="order"><b>${escapeHtml(p.name)}</b> — ₹${p.price} <span class="pill">${p.active?'visible':'hidden'}</span><br><small>${escapeHtml(p.description||'')}</small><button type="button" class="secondary edit-product-btn" data-product-id="${p.id}">✏️ Edit Product</button></div>`).join(''):'<p class="note">No products.</p>';
+
+// Bind edit buttons without inline onclick handlers
+document.querySelectorAll('.edit-product-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=Number(btn.getAttribute('data-product-id'));
+    const product=(products||[]).find(p=>Number(p.id)===id);
+    if(product) openEditProduct(product);
+    else alert('Product नहीं मिला। Dashboard refresh करके फिर कोशिश करें।');
+  });
+});
 html += '<hr><h3>Add Product</h3><div class="field"><label>Name</label><input id="pname"></div><div class="field"><label>Price ₹</label><input id="pprice" type="number"></div><div class="field"><label>Description</label><input id="pdesc"></div><button class="primary" onclick="addProduct()">Product Add करें</button>';
 document.getElementById('adminArea').innerHTML=html;
 
