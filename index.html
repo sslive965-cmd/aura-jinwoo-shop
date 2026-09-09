@@ -10,8 +10,7 @@
 <meta property="og:title" content="AURA JINWOO - Premium Digital Cards Platform">
 <meta property="og:description" content="Premium digital products with a futuristic neon experience.">
 <meta name="theme-color" content="#07020f">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">window.addEventListener("unhandledrejection",e=>{const el=document.getElementById("products");if(el&&el.textContent.includes("Products loading")){console.error(e.reason);el.innerHTML="<p class=\"msg\">Products could not be loaded. Please refresh once.</p>";}});
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800;900&display=swap');
 :root{--bg:#05020b;--panel:#0d0719;--panel2:#11091f;--line:#3b146b;--violet:#8b2cff;--pink:#d63cff;--cyan:#6f7cff;--text:#fbf8ff;--muted:#a99db7;--good:#20d9a1;--danger:#ff557c}
@@ -44,7 +43,11 @@ footer{padding:35px 4%;border-top:1px solid #2b0b4c;color:#9d8daa;display:flex;j
 .modal{display:none;position:fixed;inset:0;z-index:100;background:#000c;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.box{width:min(560px,100%);max-height:92vh;overflow:auto;background:#0c0615;border:1px solid #8a2cff;border-radius:20px;padding:22px;box-shadow:0 0 60px #8b2cff35}.close{float:right;border:0;background:none;color:#aaa;font-size:25px}.field{margin:11px 0}.field label{display:block;color:#c8b8d1;font-size:12px;margin-bottom:5px}.field input,.field textarea,.field select{width:100%;padding:12px;border-radius:9px;background:#05030a;border:1px solid #43146f;color:#fff}.field textarea{min-height:80px}.full{width:100%;margin-top:8px}.order{padding:13px;margin:9px 0;border:1px solid #391064;border-radius:12px;background:#09040f}.pill{display:inline-block;padding:5px 8px;border-radius:20px;background:#241032;color:#d9a0ff;font-size:10px}.msg{color:#bdaec7;font-size:12px}.danger{color:#ff668a}.success{color:#25dca5}
 @media(max-width:800px){header{gap:10px}.brand{min-width:145px}.brand .a{font-size:17px}.brand .b{font-size:11px}.brand small{font-size:6px;letter-spacing:2px}nav{display:none}.hero{min-height:auto;padding-top:35px}.hero-card{padding:20px;border-radius:22px}.fake-card{height:205px;padding:20px}.cardnum{font-size:16px;letter-spacing:2px;margin-top:55px}.products{grid-template-columns:1fr 1fr}.info{grid-template-columns:1fr 1fr}.support{grid-template-columns:1fr}}
 @media(max-width:520px){.hero-card h1{font-size:42px}.hero-sub{font-size:15px}.products{grid-template-columns:1fr}.trust{grid-template-columns:1fr}.trust div{padding:11px}.info{grid-template-columns:1fr}.info div{border-right:0;border-bottom:1px solid #35105d}footer{flex-direction:column;gap:10px}.auth-short{display:none}}
-.add-product-ui{margin-top:14px;padding:18px;border:1px solid #4d1a8c;border-radius:22px;background:linear-gradient(145deg,rgba(28,10,55,.95),rgba(8,4,18,.96));box-shadow:0 0 28px rgba(139,44,255,.16)}.add-product-ui .add-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}.add-product-ui .add-head .icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#8b2cff,#d83cff);font-size:22px;box-shadow:0 0 20px rgba(139,44,255,.35)}.add-product-ui .add-head h3{margin:0;font-size:22px}.add-product-ui .add-head p{margin:3px 0 0;color:#b8a9d6;font-size:12px}.add-product-ui .upload-box{border:1.5px dashed #9b35ff;border-radius:18px;padding:22px 12px;text-align:center;background:rgba(18,7,38,.7);cursor:pointer}.add-product-ui .upload-icon{font-size:32px}.add-product-ui .upload-title{font-weight:800;margin-top:8px}.add-product-ui .upload-sub{font-size:12px;color:#a99ac8;margin-top:5px}.add-product-ui .preview{display:none;max-width:100%;max-height:180px;margin:12px auto 0;border-radius:14px;border:1px solid #7130c5;object-fit:contain}.add-product-ui .field label{display:flex;justify-content:space-between;align-items:center}.add-product-ui .counter{color:#9f8bbb;font-size:11px;font-weight:500}.add-product-ui .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.add-product-ui textarea{min-height:100px;resize:vertical}.add-product-ui .required{color:#ff4f7a}.add-product-ui .hint{font-size:11px;color:#8f81aa;margin-top:6px}.add-product-ui .add-submit{margin-top:8px;border:0!important;background:linear-gradient(90deg,#b13cff,#7d4dff)!important;box-shadow:0 10px 28px rgba(139,44,255,.35);font-size:17px;font-weight:800}@media(max-width:520px){.add-product-ui .grid2{grid-template-columns:1fr}}
+
+.productValidityDisplay{color:#c9a7ff;font-size:12px;display:block;margin-top:5px;}
+
+.product-image{width:100%;height:180px;object-fit:cover;border-radius:14px;margin-bottom:12px;border:1px solid rgba(160,70,255,.35);}
+.product-validity{font-size:13px;color:#c99cff;margin:6px 0 12px;}
 </style>
 </head>
 <body>
@@ -111,34 +114,100 @@ async function login(){if(!db)return msg('authMsg','Supabase connection unavaila
 async function loadProducts(){
   const el=document.getElementById('products');
   if(!el)return;
+  el.innerHTML='<p class="msg">Products loading...</p>';
+  if(!db){
+    el.innerHTML='<p class="msg">Database connection unavailable. Please refresh.</p>';
+    return;
+  }
   try{
-    if(!db){el.innerHTML='<p class="msg">Database connection unavailable.</p>';return;}
-    const query=db.from('products').select('id,name,price,description,active,image_url,stock,category,validity').eq('active',true).order('created_at',{ascending:false});
-    const timeout=new Promise((_,reject)=>setTimeout(()=>reject(new Error('Products server timeout.')),10000));
-    const result=await Promise.race([query,timeout]);
-    const {data,error}=result;
-    if(error){el.innerHTML='<p class="msg">Products could not be loaded: '+esc(error.message)+'</p>';return;}
-    const rows=Array.isArray(data)?data:[];
-    if(!rows.length){el.innerHTML='<p class="msg">अभी कोई product उपलब्ध नहीं है.</p>';return;}
-    el.innerHTML=rows.map(p=>{
-      const stock=Number(p.stock||0);
-      const compact={id:p.id,name:p.name,price:p.price};
-      const image=p.image_url?'<img src="'+esc(p.image_url)+'" alt="'+esc(p.name)+'" style="width:100%;height:190px;object-fit:cover;border-radius:16px;margin-bottom:12px;border:1px solid #4d1a8c">':'';
-      const validity=p.validity?'<span class="productValidityDisplay">⏳ '+esc(p.validity)+'</span>':'';
-      const disabled=stock<=0?'disabled':'';
-      return '<article class="product">'+image+'<div class="product-top">AURA<br>JINWOO</div><div class="tagrow"><span class="tag">'+esc(p.category||'PREMIUM')+'</span><span class="stock">● '+(stock>0?'In Stock':'Out of Stock')+'</span></div><h3>'+esc(p.name)+'</h3><p>'+esc(p.description||'Premium digital product')+'</p><div class="price">Rs. '+Number(p.price||0).toLocaleString('en-IN')+'</div>'+validity+'<button class="buy" '+disabled+' onclick=\'startOrder('+JSON.stringify(compact).replace(/</g,"\\u003c")+')\'> Buy Now</button></article>';
+    const result=await db.from('products').select('id,name,description,price,active,created_at,image_url,stock,category,validity').eq('active',true).order('created_at',{ascending:false});
+    const data=result.data,error=result.error;
+    if(error)throw error;
+    if(!data||!data.length){
+      el.innerHTML='<p class="msg">अभी कोई product उपलब्ध नहीं है.</p>';
+      return;
+    }
+    el.innerHTML=data.map(function(p){
+      const img=p.image_url?'<img class="product-image" src="'+esc(p.image_url)+'" alt="'+esc(p.name)+'">':'';
+      const stock=Number(p.stock||0)>0?'<span class="stock">● In Stock</span>':'<span class="stock">● Available</span>';
+      const validity=p.validity?'<div class="product-validity">⏳ '+esc(p.validity)+'</div>':'';
+      const safeProduct=JSON.stringify({id:p.id,name:p.name,price:p.price,description:p.description,validity:p.validity,image_url:p.image_url,stock:p.stock,category:p.category}).replace(/</g,"\\u003c");
+      return '<article class="product">'+img+'<div class="product-top">AURA<br>JINWOO</div><div class="tagrow"><span class="tag">'+esc(p.category||'DIGITAL')+'</span>'+stock+'</div><h3>'+esc(p.name)+'</h3><p>'+esc(p.description||'Premium digital product')+'</p><div class="price">Rs. '+Number(p.price||0).toLocaleString('en-IN')+'</div>'+validity+'<button class="buy" onclick=\'startOrder('+safeProduct+')\'> Buy Now</button></article>';
     }).join('');
   }catch(err){
-    console.error('loadProducts failed',err);
-    el.innerHTML='<p class="msg">Products could not be loaded. Please refresh once.</p>';
+    console.error('Products load error:',err);
+    el.innerHTML='<p class="msg">Products load नहीं हो पाए. Please refresh once.</p>';
   }
 }
 async function startOrder(p){const u=await user();if(!u){openAuth();return}selected=p;document.getElementById('orderProduct').innerHTML=`<div class="order"><b>${esc(p.name)}</b><br>Amount: Rs. ${Number(p.price||0).toLocaleString('en-IN')}</div>`;document.getElementById('orderModal').classList.add('show')}
 async function submitOrder(){const u=await user();if(!u)return msg('orderMsg','पहले login करें.');if(!selected)return msg('orderMsg','Product select नहीं है.');const utr=document.getElementById('utr').value.trim();if(!utr)return msg('orderMsg','UTR/reference जरूरी है.');const {error}=await db.from('orders').insert({user_id:u.id,product_id:selected.id,utr,note:document.getElementById('orderNote').value,status:'pending'});msg('orderMsg',error?error.message:'Order submit हो गया. Verification के बाद status update होगा.');if(!error){document.getElementById('utr').value='';document.getElementById('orderNote').value=''}}
 async function openOrders(){const u=await user();if(!u){openAuth();return}document.getElementById('ordersModal').classList.add('show');const {data,error}=await db.from('orders').select('id,utr,status,note,delivery_details,created_at,products(name,price)').eq('user_id',u.id).order('created_at',{ascending:false});document.getElementById('ordersArea').innerHTML=error?`<p class="msg">${esc(error.message)}</p>`:data?.length?data.map(o=>`<div class="order"><b>${esc(o.products?.name||'Product')}</b> - Rs. ${Number(o.products?.price||0).toLocaleString('en-IN')}<br>UTR: ${esc(o.utr)}<br>Status: <span class="pill">${esc(o.status)}</span>${o.delivery_details?`<div class="order"><b>Delivery:</b><br>${esc(o.delivery_details)}</div>`:''}</div>`).join(''):'<p class="msg">अभी कोई order नहीं है.</p>'}
-async function loadAdmin(){if(!db)return msg('adminMsg','Database connection unavailable.');const u=await user();if(!u)return msg('adminMsg','पहले admin email से login करें.');if(!ADMIN_EMAILS.includes((u.email||'').toLowerCase()))return msg('adminMsg','यह account admin नहीं है.');const [{data:orders,error:oe},{data:products,error:pe}]=await Promise.all([db.from('orders').select('id,utr,status,note,created_at,profiles(email),products(name,price)').order('created_at',{ascending:false}),db.from('products').select('*').order('created_at',{ascending:false})]);if(oe)return msg('adminMsg',oe.message);if(pe)return msg('adminMsg',pe.message);window.adminProducts=Object.fromEntries((products||[]).map(p=>[p.id,p]));let h=`<p class="success">Admin verified: ${esc(u.email)}</p><h3>Orders</h3>`;h+=orders?.length?orders.map(o=>`<div class="order"><b>${esc(o.products?.name||'Product')}</b> - Rs. ${o.products?.price||''}<br><span class="pill">${esc(o.status)}</span><br>Customer: ${esc(o.profiles?.email||'')}<br>UTR: ${esc(o.utr)}<br><small>${new Date(o.created_at).toLocaleString()}</small><div><button class="btn full" onclick="setStatus('${o.id}','verified')">Payment Verified</button><button class="btn full" onclick="setStatus('${o.id}','rejected')">Reject</button><button class="btn green full" onclick="deliverOrder('${o.id}')">Delivered</button></div></div>`).join(''):'<p class="msg">No orders.</p>';h+='<hr><h3>Products</h3>';h+=products?.length?products.map(p=>`<div class="order"><b>${esc(p.name)}</b> - Rs. ${p.price}<br><small>${esc(p.description||'')}</small><br><span class="pill">${p.active?'visible':'hidden'}</span> <span class="pill">Stock: ${Number(p.stock??0)}</span> <span class="pill">${esc(p.category||'Uncategorized')}</span><button type="button" class="btn full" onclick="openEditProductById('${p.id}')"> Edit Product</button></div>`).join(''):'<p class="msg">No products.</p>';h+=`<hr><div class="add-product-ui"><div class="add-head"><div class="icon">＋</div><div><h3>Add Product</h3><p>AURA JINWOO • Add New Product to Your Store</p></div></div><div class="field"><label>Product Image <span class="required">*</span></label><div class="upload-box" onclick="document.getElementById('pimage').click()"><div class="upload-icon">🖼️</div><div class="upload-title">Tap to upload image</div><div class="upload-sub">PNG, JPG, JPEG • Max 5MB</div><img id="pimagePreview" class="preview" alt="Product preview"></div><input id="pimage" type="file" accept="image/png,image/jpeg,image/jpg" style="display:none" onchange="previewProductImage(this)"><div class="hint">Product image is required.</div></div><div class="field"><label>Product Name <span class="required">*</span><span class="counter" id="pnameCount">0/100</span></label><input id="pname" maxlength="100" placeholder="Enter product name" oninput="document.getElementById('pnameCount').textContent=this.value.length+'/100'"></div><div class="field"><label>Description <span class="required">*</span><span class="counter" id="pdescCount">0/500</span></label><textarea id="pdesc" maxlength="500" placeholder="Enter product description..." oninput="document.getElementById('pdescCount').textContent=this.value.length+'/500'"></textarea></div><div class="grid2"><div class="field"><label>Price <span class="required">*</span></label><input id="pprice" type="number" min="0" step="0.01" placeholder="Enter price (₹)"></div><div class="field"><label>Stock / Quantity <span class="required">*</span></label><input id="pstock" type="number" min="0" step="1" placeholder="Enter available stock"></div></div><div class="field"><label>Category <span class="required">*</span></label><select id="pcategory"><option value="">Select category</option><option>Digital Card</option><option>Gaming</option><option>Subscription</option><option>Gift Card</option><option>Other</option></select></div><div class="field"><label>Validity / Expiry <span>(optional)</span></label><input id="productValidity" type="text" maxlength="50" placeholder="e.g. 30 Days, 1 Year, or 2027-12-31"></div><button class="btn primary full add-submit" onclick="addProduct()">＋ Add Product →</button><p id="addProductMsg" class="msg"></p></div>`;document.getElementById('adminArea').innerHTML=h}
-function previewProductImage(input){const f=input.files?.[0],img=document.getElementById('pimagePreview');if(!f||!img)return;if(f.size>5*1024*1024){alert('Image 5MB से छोटी होनी चाहिए.');input.value='';img.style.display='none';img.removeAttribute('src');return}const r=new FileReader();r.onload=()=>{img.src=r.result;img.style.display='block'};r.readAsDataURL(f)}
-async function addProduct(){const name=document.getElementById('pname').value.trim(),price=Number(document.getElementById('pprice').value),description=document.getElementById('pdesc').value.trim(),stock=Number(document.getElementById('pstock').value),category=document.getElementById('pcategory').value,file=document.getElementById('pimage').files?.[0];const validity=(document.getElementById('productValidity')?.value||'').trim();if(!file)return alert('Product image select करें.');if(!name||name.length>100||!description||description.length>500||!Number.isFinite(price)||price<0||!Number.isInteger(stock)||stock<0||!category)return alert('सभी required product details भरें.');if(file.size>5*1024*1024)return alert('Image 5MB से छोटी होनी चाहिए.');const reader=new FileReader();reader.onload=async()=>{const image_url=String(reader.result||'');const {error}=await db.from('products').insert({name,price,description,active:true,image_url,stock,category,validity});if(error){msg('addProductMsg',error.message);return}alert('Product added');loadProducts();loadAdmin()};reader.readAsDataURL(file)}
+async function loadAdmin(){
+  if(!db)return msg('adminMsg','Database connection unavailable.');
+  const u=await user();
+  if(!u)return msg('adminMsg','पहले admin email से login करें.');
+  if(!ADMIN_EMAILS.includes((u.email||'').toLowerCase()))return msg('adminMsg','यह account admin नहीं है.');
+
+  const ordersResult=await db.from('orders').select('id,utr,status,note,created_at,profiles(email),products(name,price)').order('created_at',{ascending:false});
+  const productsResult=await db.from('products').select('*').order('created_at',{ascending:false});
+  if(ordersResult.error)return msg('adminMsg',ordersResult.error.message);
+  if(productsResult.error)return msg('adminMsg',productsResult.error.message);
+
+  const orders=ordersResult.data||[];
+  const products=productsResult.data||[];
+  window.adminProducts=Object.fromEntries(products.map(function(p){return [p.id,p]}));
+
+  let h='<p class="success">Admin verified: '+esc(u.email)+'</p><h3>Orders</h3>';
+  h+=orders.length?orders.map(function(o){
+    return '<div class="order"><b>'+esc(o.products?.name||'Product')+'</b> - Rs. '+(o.products?.price||'')+
+      '<br><span class="pill">'+esc(o.status)+'</span><br>Customer: '+esc(o.profiles?.email||'')+
+      '<br>UTR: '+esc(o.utr||'')+'<br><small>'+new Date(o.created_at).toLocaleString()+
+      '</small><div><button class="btn full" onclick="setStatus(\''+o.id+'\',\'verified\')">Payment Verified</button>'+
+      '<button class="btn full" onclick="setStatus(\''+o.id+'\',\'rejected\')">Reject</button>'+
+      '<button class="btn green full" onclick="deliverOrder(\''+o.id+'\')">Delivered</button></div></div>';
+  }).join(''):'<p class="msg">No orders.</p>';
+
+  h+='<hr><h3>Products</h3>';
+  h+=products.length?products.map(function(p){
+    return '<div class="order"><b>'+esc(p.name)+'</b> - Rs. '+p.price+
+      '<br><small>'+esc(p.description||'')+'</small>'+
+      '<br><span class="pill">'+(p.active?'visible':'hidden')+'</span>'+
+      (p.validity?'<span class="pill">⏳ '+esc(p.validity)+'</span>':'')+
+      '<button type="button" class="btn full" onclick="openEditProductById(\''+p.id+'\')"> Edit Product</button></div>';
+  }).join(''):'<p class="msg">No products.</p>';
+
+  h+='<hr><h3>Add Product</h3>'+
+    '<div class="field"><label>Name</label><input id="pname" maxlength="100"></div>'+
+    '<div class="field"><label>Price Rs.</label><input id="pprice" type="number" min="0" step="0.01"></div>'+
+    '<div class="field"><label>Description</label><input id="pdesc" maxlength="500"></div>'+
+    '<div class="field"><label>Validity / Expiry (optional)</label><input id="productValidity" maxlength="50" placeholder="30 Days / 1 Year / 2027-12-31"></div>'+
+    '<div class="field"><label>Category</label><input id="productCategory" maxlength="50" placeholder="Digital Card"></div>'+
+    '<div class="field"><label>Stock / Quantity</label><input id="productStock" type="number" min="0" step="1" value="0"></div>'+
+    '<button class="btn primary full" type="button" onclick="addProduct()">＋ Add Product</button>';
+
+  document.getElementById('adminArea').innerHTML=h;
+}
+async function addProduct(){
+  const name=document.getElementById('pname').value.trim();
+  const price=Number(document.getElementById('pprice').value);
+  const description=document.getElementById('pdesc').value.trim();
+  const validity=(document.getElementById('productValidity')?.value||'').trim();
+  const category=(document.getElementById('productCategory')?.value||'Digital Card').trim();
+  const stock=Math.max(0,Number(document.getElementById('productStock')?.value||0));
+
+  if(!name||!Number.isFinite(price)||price<0)return alert('Name और सही price डालें.');
+  if(!Number.isFinite(stock))return alert('सही stock डालें.');
+
+  const payload={name,price,description,active:true,validity,category,stock};
+  const {error}=await db.from('products').insert(payload);
+  if(error){
+    alert(error.message);
+    return;
+  }
+  alert('Product added');
+  loadProducts();
+  loadAdmin();
+}
 async function setStatus(id,status){const {error}=await db.from('orders').update({status}).eq('id',id);if(error)alert(error.message);else loadAdmin()}
 async function deliverOrder(id){const d=prompt('Customer को क्या deliver करना है? Code/link/instructions लिखें:');if(d===null||!d.trim())return;const {error}=await db.from('orders').update({status:'delivered',delivery_details:d.trim()}).eq('id',id);if(error)alert(error.message);else loadAdmin()}
 function openEditProductById(id){const p=window.adminProducts?.[id];if(!p)return alert('Product नहीं मिला. Dashboard refresh करें.');document.getElementById('editPid').value=p.id;document.getElementById('editName').value=p.name||'';document.getElementById('editPrice').value=p.price??'';document.getElementById('editDesc').value=p.description||'';document.getElementById('editActive').value=String(p.active);document.getElementById('editMsg').textContent='';document.getElementById('editProductModal').classList.add('show')}
@@ -146,7 +215,6 @@ async function saveProductEdit(){const id=document.getElementById('editPid').val
 document.addEventListener("DOMContentLoaded",()=>{loadProducts();});
 window.addEventListener("error",e=>{const el=document.getElementById("products");if(el&&el.textContent.includes("Products loading"))el.innerHTML="<p class=\"msg\">Website script error. Please refresh once.</p>";});
 
-window.addEventListener("unhandledrejection",e=>{const el=document.getElementById("products");if(el&&el.textContent.includes("Products loading")){console.error(e.reason);el.innerHTML="<p class=\"msg\">Products could not be loaded. Please refresh once.</p>";}});
 </script>
 </body>
 </html>
