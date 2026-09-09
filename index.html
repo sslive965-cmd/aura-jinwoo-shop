@@ -121,4 +121,1227 @@ background:#09040f;
 display:grid;
 place-items:center;
 color:#c978ff;
-font:
+font:800 19px Orbitron
+}
+
+.tagrow{
+display:flex;
+justify-content:space-between;
+margin:8px 0
+}
+
+.tag,.pill{
+font-size:9px;
+padding:4px 7px;
+border-radius:12px;
+background:#281039;
+color:#d6a5ff
+}
+
+.stock{
+font-size:9px;
+color:#20d9a1
+}
+
+.product h3{
+font-size:14px;
+margin:7px 0
+}
+
+.product p{
+font-size:10px;
+color:#a99db7;
+min-height:28px;
+margin:0
+}
+
+.meta{
+font-size:9px;
+color:#c5b4d0;
+margin:6px 0
+}
+
+.price{
+font:800 18px Orbitron;
+margin:8px 0
+}
+
+.buy{
+width:100%;
+padding:9px
+}
+
+.info{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+border:1px solid #40106e;
+border-radius:15px;
+overflow:hidden
+}
+
+.info div{
+padding:15px;
+background:#0c0614;
+border-right:1px solid #321052
+}
+
+.info div:last-child{
+border:0
+}
+
+.info b{
+font-size:11px
+}
+
+.info p{
+font-size:9px;
+color:#a99db7
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+z-index:20;
+background:#000c;
+align-items:center;
+justify-content:center;
+padding:12px
+}
+
+.modal.show{
+display:flex
+}
+
+.box{
+width:min(620px,100%);
+max-height:94vh;
+overflow:auto;
+background:#0c0615;
+border:1px solid #8b2cff;
+border-radius:17px;
+padding:16px
+}
+
+.close{
+float:right;
+background:none;
+border:0;
+color:#aaa;
+font-size:22px
+}
+
+.field{
+margin:8px 0
+}
+
+.field label{
+display:block;
+font-size:10px;
+color:#cdbde0;
+margin-bottom:4px
+}
+
+.field input,
+.field textarea,
+.field select{
+width:100%;
+padding:9px;
+background:#05030a;
+border:1px solid #43146f;
+border-radius:8px;
+color:#fff
+}
+
+.field textarea{
+min-height:65px
+}
+
+.full{
+width:100%;
+margin-top:6px
+}
+
+.qr{
+display:block;
+width:220px;
+max-width:75%;
+margin:10px auto;
+background:#fff;
+padding:6px;
+border-radius:10px
+}
+
+.adminGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.card{
+border:1px solid #46137b;
+border-radius:13px;
+padding:11px;
+background:#09040f
+}
+
+.formGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+}
+
+.wide{
+grid-column:1/-1
+}
+
+.adminProducts{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+}
+
+.adminProduct{
+border:1px solid #321052;
+padding:8px;
+border-radius:9px;
+font-size:10px
+}
+
+.msg{
+font-size:10px;
+color:#bdaec7
+}
+
+.ok{
+color:#20d9a1
+}
+
+footer{
+text-align:center;
+padding:25px;
+color:#897b95;
+font-size:9px;
+border-top:1px solid #2b0b4c
+}
+
+@media(max-width:700px){
+nav{display:none}
+.products{grid-template-columns:1fr 1fr}
+.info{grid-template-columns:1fr 1fr}
+.adminGrid{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+.products{grid-template-columns:1fr}
+.info{grid-template-columns:1fr}
+
+.info div{
+border-right:0;
+border-bottom:1px solid #321052
+}
+
+.formGrid,.adminProducts{
+grid-template-columns:1fr
+}
+
+.wide{
+grid-column:auto
+}
+
+.heroBox{
+padding:22px
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a class="logo" href="#home">AURA<b>JINWOO</b></a>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#shop">Products</a>
+<a href="#how">How It Works</a>
+</nav>
+
+<button class="btn" onclick="auth()">Login / Register</button>
+<button class="btn" onclick="orders()">My Orders</button>
+<button class="btn" onclick="admin()">Admin</button>
+</header>
+
+<main>
+
+<section id="home" class="hero">
+<div class="heroBox">
+
+<small class="pill">
+SECURE • FAST • ADMIN CONTROLLED
+</small>
+
+<h1>AURA <span>JINWOO</span></h1>
+
+<p>Premium Digital Products Platform</p>
+
+<button class="btn primary"
+onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+Explore Products
+</button>
+
+</div>
+</section>
+
+
+<section id="shop" class="section">
+
+<h2>Featured Products</h2>
+
+<p class="msg">
+Account required to order.
+</p>
+
+<div id="products" class="products">
+<p class="msg">Products loading...</p>
+</div>
+
+</section>
+
+
+<section id="how" class="section">
+
+<h2>How It Works</h2>
+
+<div class="info">
+
+<div>
+<b>1. Register</b>
+<p>Email account बनाएं.</p>
+</div>
+
+<div>
+<b>2. Buy</b>
+<p>Product चुनें.</p>
+</div>
+
+<div>
+<b>3. Pay</b>
+<p>QR payment + UTR.</p>
+</div>
+
+<div>
+<b>4. Delivery</b>
+<p>Admin verification के बाद.</p>
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+© 2026 AURA JINWOO
+</footer>
+
+
+<!-- LOGIN -->
+
+<div id="authM" class="modal">
+
+<div class="box">
+
+<button class="close" onclick="closeM()">×</button>
+
+<h2>Account</h2>
+
+<div class="field">
+<label>Email</label>
+<input id="email" type="email">
+</div>
+
+<div class="field">
+<label>Password</label>
+<input id="pass" type="password">
+</div>
+
+<button class="btn primary full" onclick="login()">
+Login
+</button>
+
+<button class="btn full" onclick="register()">
+Register
+</button>
+
+<p id="authMsg" class="msg"></p>
+
+</div>
+</div>
+
+
+<!-- BUY -->
+
+<div id="orderM" class="modal">
+
+<div class="box">
+
+<button class="close" onclick="closeM()">×</button>
+
+<h2>Buy Product</h2>
+
+<div id="op"></div>
+
+<img class="qr"
+src="payment-qr.jpg"
+alt="Payment QR">
+
+<p class="msg">
+QR payment करें और UTR submit करें.
+</p>
+
+<div class="field">
+<label>UTR / Payment Reference *</label>
+<input id="utr">
+</div>
+
+<div class="field">
+<label>Note</label>
+<textarea id="note"></textarea>
+</div>
+
+<button class="btn primary full"
+onclick="submitOrder()">
+Submit Order
+</button>
+
+<p id="orderMsg" class="msg"></p>
+
+</div>
+</div>
+
+
+<!-- ORDERS -->
+
+<div id="ordersM" class="modal">
+
+<div class="box">
+
+<button class="close" onclick="closeM()">×</button>
+
+<h2>My Orders</h2>
+
+<div id="ordersA"></div>
+
+</div>
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminM" class="modal">
+
+<div class="box">
+
+<button class="close" onclick="closeM()">×</button>
+
+<div id="adminA">
+
+<button class="btn primary full"
+onclick="loadAdmin()">
+Open Admin Dashboard
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- EDIT -->
+
+<div id="editM" class="modal">
+
+<div class="box">
+
+<button class="close" onclick="closeM()">×</button>
+
+<h2>Edit Product</h2>
+
+<input type="hidden" id="eid">
+
+<div class="field">
+<label>Name</label>
+<input id="en">
+</div>
+
+<div class="field">
+<label>Price</label>
+<input id="ep" type="number">
+</div>
+
+<div class="field">
+<label>Validity</label>
+<input id="ev">
+</div>
+
+<div class="field">
+<label>Category</label>
+<input id="ec">
+</div>
+
+<div class="field">
+<label>Stock</label>
+<input id="es" type="number">
+</div>
+
+<div class="field">
+<label>Description</label>
+<textarea id="ed"></textarea>
+</div>
+
+<div class="field">
+<label>Visibility</label>
+
+<select id="ea">
+<option value="true">Visible</option>
+<option value="false">Hidden</option>
+</select>
+
+</div>
+
+<button class="btn primary full"
+onclick="saveEdit()">
+Save Changes
+</button>
+
+<p id="editMsg" class="msg"></p>
+
+</div>
+</div>
+
+
+<script>
+
+const db =
+window.supabase.createClient(
+'https://zksdzoxmxbqqochmwxhf.supabase.co',
+'sb_publishable_FKeym5pdwLyXioleSEiPAA_tUR2uyrD'
+);
+
+const ADM=[
+'sslive965@gmail.com',
+'gamingbind40054@gmail.com'
+];
+
+let sel=null;
+let AP={};
+
+const $=x=>document.getElementById(x);
+
+const esc=x=>
+String(x??'').replace(
+/[&<>"']/g,
+c=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+}[c])
+);
+
+function show(x){
+$(x).classList.add('show')
+}
+
+function closeM(){
+document
+.querySelectorAll('.modal')
+.forEach(x=>x.classList.remove('show'))
+}
+
+function auth(){
+show('authM')
+}
+
+async function u(){
+return (await db.auth.getUser()).data.user
+}
+
+
+async function register(){
+
+let e=$('email').value.trim();
+let p=$('pass').value;
+
+if(p.length<6)
+return $('authMsg').textContent=
+'Password कम से कम 6 characters.';
+
+let{error}=
+await db.auth.signUp({
+email:e,
+password:p
+});
+
+$('authMsg').textContent=
+error
+?error.message
+:'Registration हो गया. Email verify करें.';
+
+}
+
+
+async function login(){
+
+let{error}=
+await db.auth.signInWithPassword({
+email:$('email').value.trim(),
+password:$('pass').value
+});
+
+$('authMsg').textContent=
+error
+?error.message
+:'Login successful';
+
+if(!error)
+setTimeout(closeM,300);
+
+}
+
+
+async function load(){
+
+let el=$('products');
+
+try{
+
+let{data,error}=
+await db
+.from('products')
+.select(
+'id,name,description,price,image_url,stock,category,validity'
+)
+.eq('active',true)
+.order('created_at',{ascending:false});
+
+if(error)
+throw error;
+
+if(!data?.length)
+return el.innerHTML=
+'<p class="msg">अभी कोई product उपलब्ध नहीं है.</p>';
+
+el.innerHTML=
+data.map(p=>`
+
+<article class="product">
+
+${
+p.image_url
+?`<img class="pimg"
+src="${esc(p.image_url)}">`
+:'<div class="ph">AURA</div>'
+}
+
+<div class="tagrow">
+
+<span class="tag">
+${esc(p.category||'Digital')}
+</span>
+
+<span class="stock">
+● ${Number(p.stock||0)>0
+?'In Stock'
+:'Out of Stock'}
+</span>
+
+</div>
+
+<h3>${esc(p.name)}</h3>
+
+<p>
+${esc(p.description||'Premium digital product')}
+</p>
+
+${
+p.validity
+?`<div class="meta">
+⏳ ${esc(p.validity)}
+</div>`
+:''
+}
+
+<div class="price">
+₹${Number(p.price||0).toLocaleString('en-IN')}
+</div>
+
+<button
+class="buy"
+${Number(p.stock||0)<=0?'disabled':''}
+onclick='buy(${JSON.stringify({
+id:p.id,
+name:p.name,
+price:p.price
+}).replace(/</g,'\\u003c')})'>
+
+Buy Now
+
+</button>
+
+</article>
+
+`).join('');
+
+}catch(e){
+
+console.error(e);
+
+el.innerHTML=
+'<p class="msg">Products load नहीं हो पाए. Refresh करें.</p>';
+
+}
+
+}
+
+
+async function buy(p){
+
+if(!await u())
+return auth();
+
+sel=p;
+
+$('op').innerHTML=`
+
+<div class="card">
+
+<b>${esc(p.name)}</b>
+
+<br>
+
+Amount:
+₹${Number(p.price).toLocaleString('en-IN')}
+
+</div>
+`;
+
+show('orderM');
+
+}
+
+
+async function submitOrder(){
+
+let x=await u();
+
+if(!x)
+return auth();
+
+let t=$('utr').value.trim();
+
+if(!t)
+return $('orderMsg').textContent=
+'UTR जरूरी है.';
+
+let{error}=
+await db
+.from('orders')
+.insert({
+user_id:x.id,
+product_id:sel.id,
+utr:t,
+note:$('note').value.trim(),
+status:'pending'
+});
+
+$('orderMsg').textContent=
+error
+?error.message
+:'Order submitted. Admin verification के बाद status update होगा.';
+
+}
+
+
+async function orders(){
+
+let x=await u();
+
+if(!x)
+return auth();
+
+show('ordersM');
+
+let{data,error}=
+await db
+.from('orders')
+.select(
+'id,utr,status,delivery_details,created_at,products(name,price)'
+)
+.eq('user_id',x.id)
+.order('created_at',{ascending:false});
+
+$('ordersA').innerHTML=
+error
+?esc(error.message)
+:data?.length
+?data.map(o=>`
+
+<div class="order">
+
+<b>
+${esc(o.products?.name||'Product')}
+</b>
+
+· ₹${Number(
+o.products?.price||0
+).toLocaleString('en-IN')}
+
+<br>
+
+UTR:
+${esc(o.utr)}
+
+<br>
+
+<span class="pill">
+${esc(o.status)}
+</span>
+
+${
+o.delivery_details
+?`<p>${esc(o.delivery_details)}</p>`
+:''
+}
+
+</div>
+
+`).join('')
+:'<p class="msg">No orders.</p>';
+
+}
+
+
+async function admin(){
+show('adminM')
+}
+
+
+async function loadAdmin(){
+
+let x=await u();
+
+if(!x)
+return $('adminA').innerHTML=
+'<p class="msg">पहले admin login करें.</p>';
+
+if(!ADM.includes(
+(x.email||'').toLowerCase()
+))
+return $('adminA').innerHTML=
+'<p class="msg">Admin access नहीं है.</p>';
+
+let[a,b]=await Promise.all([
+
+db
+.from('orders')
+.select(
+'id,utr,status,created_at,profiles(email),products(name,price)'
+)
+.order('created_at',{ascending:false}),
+
+db
+.from('products')
+.select('*')
+.order('created_at',{ascending:false})
+
+]);
+
+if(a.error||b.error)
+return $('adminA').innerHTML=
+'<p class="msg">'+
+esc((a.error||b.error).message)+
+'</p>';
+
+AP=Object.fromEntries(
+b.data.map(p=>[p.id,p])
+);
+
+$('adminA').innerHTML=`
+
+<div class="adminGrid">
+
+
+<section class="card">
+
+<h3>＋ Add Product</h3>
+
+<div class="formGrid">
+
+
+<div class="field">
+<label>Product Name *</label>
+<input id="pn">
+</div>
+
+
+<div class="field">
+<label>Price ₹ *</label>
+<input id="pp" type="number" min="0">
+</div>
+
+
+<div class="field">
+<label>Validity / Expiry</label>
+<input
+id="pv"
+placeholder="30 Days / 1 Year">
+</div>
+
+
+<div class="field">
+
+<label>Category</label>
+
+<select id="pc">
+
+<option>Digital Card</option>
+<option>Gaming</option>
+<option>Subscription</option>
+<option>Gift Card</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+<label>Stock</label>
+<input
+id="ps"
+type="number"
+min="0"
+value="1">
+</div>
+
+
+<div class="field">
+
+<label>Image</label>
+
+<input
+id="pi"
+type="file"
+accept="image/png,image/jpeg">
+
+</div>
+
+
+<div class="field wide">
+
+<label>Description</label>
+
+<textarea id="pd"></textarea>
+
+</div>
+
+
+<button
+class="btn primary full wide"
+onclick="add()">
+
+＋ Add Product
+
+</button>
+
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+Products (${b.data.length})
+</h3>
+
+<div class="adminProducts">
+
+${
+b.data.length
+
+?b.data.map(p=>`
+
+<div class="adminProduct">
+
+<b>${esc(p.name)}</b>
+
+<br>
+
+₹${Number(p.price).toLocaleString('en-IN')}
+· Stock ${p.stock||0}
+
+<br>
+
+<span class="pill">
+${p.active?'Visible':'Hidden'}
+</span>
+
+<button
+class="btn"
+onclick="edit(${p.id})">
+
+Edit
+
+</button>
+
+</div>
+
+`).join('')
+
+:'<p class="msg">No products.</p>'
+}
+
+</div>
+
+</section>
+
+
+<section class="card wide">
+
+<h3>Recent Orders</h3>
+
+${
+a.data.length
+
+?a.data.slice(0,10).map(o=>`
+
+<div class="order">
+
+<b>
+${esc(o.products?.name||'Product')}
+</b>
+
+· ₹${Number(
+o.products?.price||0
+).toLocaleString('en-IN')}
+
+<br>
+
+<small>
+
+${esc(o.profiles?.email||'')}
+· UTR ${esc(o.utr||'')}
+
+</small>
+
+<br>
+
+<span class="pill">
+${esc(o.status)}
+</span>
+
+<button
+class="btn full"
+onclick="status(${o.id},'verified')">
+
+Payment Verified
+
+</button>
+
+<button
+class="btn green full"
+onclick="deliver(${o.id})">
+
+Delivered
+
+</button>
+
+</div>
+
+`).join('')
+
+:'<p class="msg">No orders.</p>'
+}
+
+</section>
+
+</div>
+`;
+
+}
+
+
+async function add(){
+
+let n=$('pn').value.trim();
+let p=Number($('pp').value);
+let v=$('pv').value.trim();
+let c=$('pc').value;
+let s=Math.max(
+0,
+Number($('ps').value||0)
+);
+let d=$('pd').value.trim();
+let img='';
+
+if(
+!n||
+!Number.isFinite(p)||
+p<0
+)
+return alert(
+'Name और सही price डालें.'
+);
+
+let f=$('pi').files?.[0];
+
+if(f){
+
+if(f.size>5e6)
+return alert(
+'Image max 5MB.'
+);
+
+img=await new Promise(r=>{
+
+let q=new FileReader();
+
+q.onload=()=>r(q.result);
+
+q.readAsDataURL(f);
+
+});
+
+}
+
+let{error}=
+await db
+.from('products')
+.insert({
+
+name:n,
+price:p,
+description:d,
+validity:v,
+category:c,
+stock:s,
+image_url:img,
+active:true
+
+});
+
+if(error)
+return alert(error.message);
+
+load();
+loadAdmin();
+
+}
+
+
+function edit(id){
+
+let p=AP[id];
+
+$('eid').value=p.id;
+$('en').value=p.name||'';
+$('ep').value=p.price;
+$('ev').value=p.validity||'';
+$('ec').value=p.category||'';
+$('es').value=p.stock||0;
+$('ed').value=p.description||'';
+$('ea').value=String(p.active);
+
+show('editM');
+
+}
+
+
+async function saveEdit(){
+
+let id=$('eid').value;
+
+let{error}=
+await db
+.from('products')
+.update({
+
+name:$('en').value.trim(),
+price:Number($('ep').value),
+validity:$('ev').value.trim(),
+category:$('ec').value.trim(),
+stock:Number($('es').value||0),
+description:$('ed').value.trim(),
+active:$('ea').value==='true'
+
+})
+.eq('id',id);
+
+if(error)
+return $('editMsg').textContent=
+error.message;
+
+closeM();
+
+load();
+loadAdmin();
+
+}
+
+
+async function status(id,s){
+
+let{error}=
+await db
+.from('orders')
+.update({status:s})
+.eq('id',id);
+
+if(error)
+alert(error.message);
+else
+loadAdmin();
+
+}
+
+
+async function deliver(id){
+
+let d=prompt(
+'Delivery details लिखें:'
+);
+
+if(!d?.trim())
+return;
+
+let{error}=
+await db
+.from('orders')
+.update({
+status:'delivered',
+delivery_details:d.trim()
+})
+.eq('id',id);
+
+if(error)
+alert(error.message);
+else
+loadAdmin();
+
+}
+
+
+document.addEventListener(
+'DOMContentLoaded',
+load
+);
+
+</script>
+
+</body>
+  </html>
