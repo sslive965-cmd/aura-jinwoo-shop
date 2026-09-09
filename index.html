@@ -3,133 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AURA JINWOO — Virtual Products</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-onerror="this.onerror=null;this.src='https://unpkg.com/@supabase/supabase-js@2'"></script>
+<title>AURA JINWOO</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#05030d;color:#fff;
- font-family:Arial,sans-serif;
-}
-header{
- position:sticky;top:0;z-index:10;
- background:#08050f;border-bottom:1px solid #6d20c5;
- padding:14px 5%;display:flex;align-items:center;
- justify-content:space-between;
-}
-.logo{font-weight:900;font-size:25px;color:#a936ff}
+body{margin:0;background:#05030b;color:#fff;font-family:Arial,sans-serif}
+header{padding:18px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #7020c9;background:#08050f}
+.logo{font-size:27px;font-weight:900;color:#a832ff}
 .logo span{display:block;color:#fff;font-size:15px}
 nav a{color:#ddd;text-decoration:none;margin:0 10px}
-.account button,.btn{
- border:0;border-radius:10px;padding:11px 16px;
- color:#fff;background:linear-gradient(100deg,#7520ff,#d43cff);
- font-weight:bold;cursor:pointer
+button{cursor:pointer}
+.btn{border:0;border-radius:10px;padding:12px 18px;color:#fff;font-weight:bold;background:linear-gradient(100deg,#7620ff,#d13cff)}
+.page{max-width:1400px;margin:auto;padding:25px}
+.layout{display:grid;grid-template-columns:190px 1fr 390px;gap:15px}
+.panel,.side{background:#090611;border:1px solid #4b148d;border-radius:15px;padding:16px}
+.side a{display:block;color:#ccc;padding:12px;text-decoration:none;border-radius:8px}
+.side a:hover{background:#7020d0;color:#fff}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}
+.filter{background:#0c0714;color:#ccc;border:1px solid #50158d;border-radius:20px;padding:9px 14px}
+.filter.active{background:#982cff;color:#fff}
+.search,.field input,.field select,.field textarea{
+width:100%;padding:12px;border-radius:9px;
+background:#05030a;color:#fff;border:1px solid #51158f
 }
-.hero{
- padding:45px 5%;text-align:center;
- background:radial-gradient(circle,#54128b44,transparent 60%)
-}
-.hero h1{font-size:42px;color:#fff}
-.hero h1 span{color:#c13cff}
-.page{max-width:1400px;margin:auto;padding:20px}
-.layout{
- display:grid;grid-template-columns:190px 1fr 380px;gap:16px
-}
-.panel,.side{
- background:#090611;border:1px solid #491284;
- border-radius:16px;padding:16px
-}
-.side a{
- display:block;padding:12px;margin:5px 0;
- color:#ccc;text-decoration:none;border-radius:9px
-}
-.side a:hover,.side a.active{
- background:linear-gradient(100deg,#7220dc,#a62cff)
-}
-.head{
- display:flex;justify-content:space-between;
- align-items:center;gap:10px
-}
-.filters{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}
-.filter{
- padding:9px 13px;border-radius:20px;
- background:#0d0817;color:#ccc;border:1px solid #47117e;
- cursor:pointer
-}
-.filter.active{background:#9b2cff;color:#fff}
-.search{
- width:100%;padding:12px;margin-bottom:15px;
- border-radius:9px;border:1px solid #47117e;
- background:#05030a;color:#fff
-}
-.grid{
- display:grid;grid-template-columns:repeat(3,1fr);gap:12px
-}
-.product{
- border:1px solid #491284;border-radius:13px;
- padding:10px;background:#0b0613
-}
-.product img,.placeholder{
- width:100%;height:120px;object-fit:cover;
- border-radius:9px;background:#160b24;
- display:grid;place-items:center;color:#b53cff
-}
+.search{margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.product{border:1px solid #4c158b;border-radius:12px;padding:10px;background:#0b0613}
+.product img,.placeholder{width:100%;height:120px;object-fit:cover;border-radius:8px;background:#150b24;display:grid;place-items:center}
 .product h3{font-size:15px}
-.muted{color:#9e92aa;font-size:12px}
+.muted{color:#a99db7;font-size:12px}
 .price{font-size:20px;font-weight:bold}
-.buy{
- width:100%;padding:10px;margin-top:8px;
- border:0;border-radius:8px;background:#8d27ff;
- color:#fff;font-weight:bold
-}
+.buy{width:100%;border:0;border-radius:8px;padding:10px;background:#8d27ff;color:#fff;font-weight:bold}
 .field{margin-bottom:12px}
 .field label{display:block;margin-bottom:6px;color:#ccc}
-.field input,.field select,.field textarea{
- width:100%;padding:12px;border-radius:9px;
- border:1px solid #47117e;background:#05030a;
- color:#fff
-}
 .field textarea{min-height:80px}
-.file{
- border:1px dashed #6a20a5;padding:16px;
- border-radius:9px;text-align:center
-}
-.msg{font-size:12px;margin-top:10px;color:#cdbddd}
+.file{border:1px dashed #6420a3;padding:14px;border-radius:9px}
+.msg{font-size:12px;margin-top:10px}
 .ok{color:#20e0a5}
 .err{color:#ff6688}
-.modal{
- display:none;position:fixed;inset:0;
- background:#000b;z-index:100;
- align-items:center;justify-content:center;padding:15px
-}
+.modal{display:none;position:fixed;inset:0;background:#000c;align-items:center;justify-content:center;padding:15px;z-index:99}
 .modal.show{display:flex}
-.box{
- width:min(500px,100%);max-height:90vh;overflow:auto;
- background:#0b0614;border:1px solid #8e2cff;
- border-radius:15px;padding:18px
-}
+.box{width:min(500px,100%);max-height:90vh;overflow:auto;background:#0b0614;border:1px solid #8d2cff;border-radius:15px;padding:18px}
 .close{float:right;background:none;border:0;color:#fff;font-size:25px}
-.order{
- border:1px solid #47117e;padding:10px;
- border-radius:9px;margin:8px 0
-}
-@media(max-width:1100px){
- .layout{grid-template-columns:170px 1fr}
- .layout>.panel:last-child{grid-column:2}
- .grid{grid-template-columns:repeat(2,1fr)}
+.order{border:1px solid #4b158b;padding:10px;border-radius:8px;margin:8px 0}
+@media(max-width:1050px){
+.layout{grid-template-columns:170px 1fr}
+.layout>section:last-child{grid-column:2}
+.grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:650px){
- header{padding:12px 3%}
- nav{display:none}
- .layout{display:block}
- .side{margin-bottom:10px;display:flex;overflow:auto}
- .side a{white-space:nowrap}
- .grid{grid-template-columns:1fr}
- .hero h1{font-size:30px}
- .page{padding:8px}
+nav{display:none}
+.layout{display:block}
+.side{display:flex;overflow:auto;margin-bottom:10px}
+.side a{white-space:nowrap}
+.grid{grid-template-columns:1fr}
+.page{padding:8px}
 }
 </style>
 </head>
@@ -137,210 +66,174 @@ nav a{color:#ddd;text-decoration:none;margin:0 10px}
 <body>
 
 <header>
- <a class="logo" href="#home">
-  AURA
-  <span>JINWOO</span>
- </a>
+<div class="logo">AURA<span>JINWOO</span></div>
 
- <nav>
-  <a href="#home">Home</a>
-  <a href="#shop">Products</a>
-  <a href="#orders" onclick="openOrders();return false">My Orders</a>
-  <a href="#" onclick="openAdmin();return false">Admin</a>
- </nav>
+<nav>
+<a href="#products">Products</a>
+<a href="#" onclick="orders();return false">My Orders</a>
+<a href="#" onclick="admin();return false">Admin</a>
+</nav>
 
- <div class="account">
-  <button onclick="openAuth()">👤 Account</button>
- </div>
+<button class="btn" onclick="auth()">👤 Account</button>
 </header>
 
-<section class="hero" id="home">
- <h1>AURA <span>JINWOO</span></h1>
- <p class="muted">Next-Gen Digital Products Platform</p>
- <button class="btn" onclick="document.getElementById('shop').scrollIntoView()">
-  Enter Platform
- </button>
-</section>
-
-<main class="page" id="shop">
+<div class="page">
 
 <div class="layout">
 
 <aside class="side">
- <a class="active" href="#shop">◇ Products</a>
- <a href="#orders" onclick="openOrders();return false">🛒 Orders</a>
- <a href="#" onclick="openAdmin();return false">⚙ Admin</a>
- <a href="#" onclick="logout();return false">↪ Logout</a>
+<a href="#products">◇ Products</a>
+<a href="#" onclick="orders();return false">🛒 Orders</a>
+<a href="#" onclick="admin();return false">⚙ Admin</a>
+<a href="#" onclick="logout();return false">↪ Logout</a>
 </aside>
 
-<section class="panel">
+<section class="panel" id="products">
 
- <div class="head">
-  <div>
-   <h2>Our Products</h2>
-   <p class="muted">Browse available products</p>
-  </div>
+<h2>Our Products</h2>
 
-  <button class="btn"
-   onclick="document.getElementById('addPanel').scrollIntoView({behavior:'smooth'})">
-   ＋ Add Product
-  </button>
- </div>
+<div class="filters">
+<button class="filter active" onclick="cat('All',this)">All</button>
+<button class="filter" onclick="cat('Visa',this)">Visa</button>
+<button class="filter" onclick="cat('MasterCard',this)">MasterCard</button>
+<button class="filter" onclick="cat('UPI',this)">UPI</button>
+<button class="filter" onclick="cat('Gift Card',this)">Gift Card</button>
+<button class="filter" onclick="cat('Other',this)">Other</button>
+</div>
 
- <div class="filters">
-  <button class="filter active" onclick="setCat('All',this)">All</button>
-  <button class="filter" onclick="setCat('Visa',this)">Visa</button>
-  <button class="filter" onclick="setCat('MasterCard',this)">MasterCard</button>
-  <button class="filter" onclick="setCat('UPI',this)">UPI</button>
-  <button class="filter" onclick="setCat('Gift Card',this)">Gift Card</button>
-  <button class="filter" onclick="setCat('Other',this)">Other</button>
- </div>
+<input class="search" id="search" placeholder="🔎 Search product..." oninput="render()">
 
- <input id="search" class="search"
-  placeholder="🔎 Search product..."
-  oninput="render()">
-
- <div id="products" class="grid">
-  <div class="muted">Products loading...</div>
- </div>
+<div id="list" class="grid">
+<div class="muted">Products loading...</div>
+</div>
 
 </section>
 
-<section class="panel" id="addPanel">
+<section class="panel">
 
- <h2>＋ Add Product</h2>
- <p class="muted">Admin product creation</p>
+<h2>＋ Add Product</h2>
 
- <div class="field">
-  <label>Product Name *</label>
-  <input id="pname" placeholder="Example: Visa Virtual Product">
- </div>
+<div class="field">
+<label>Product Name *</label>
+<input id="pname" placeholder="Product name">
+</div>
 
- <div class="field">
-  <label>Price (₹) *</label>
-  <input id="pprice" type="number" min="0" placeholder="499">
- </div>
+<div class="field">
+<label>Price (₹) *</label>
+<input id="pprice" type="number" step="any" placeholder="Price">
+</div>
 
- <div class="field">
-  <label>Validity / Expiry</label>
-  <input id="pvalid" placeholder="30 Days">
- </div>
+<div class="field">
+<label>Validity / Expiry</label>
+<input id="pvalid" placeholder="Example: 30 Days">
+</div>
 
- <div class="field">
-  <label>Category *</label>
-  <select id="pcat">
-   <option>Visa</option>
-   <option>MasterCard</option>
-   <option>UPI</option>
-   <option>Gift Card</option>
-   <option>Other</option>
-  </select>
- </div>
+<div class="field">
+<label>Category *</label>
+<select id="pcat">
+<option>Visa</option>
+<option>MasterCard</option>
+<option>UPI</option>
+<option>Gift Card</option>
+<option>Other</option>
+</select>
+</div>
 
- <div class="field">
-  <label>Stock Quantity *</label>
-  <input id="pstock" type="number" min="0" value="1">
- </div>
+<div class="field">
+<label>Stock Quantity *</label>
+<input id="pstock" type="number" step="any" placeholder="Stock">
+</div>
 
- <div class="field">
-  <label>Image</label>
-  <div class="file">
-   <input id="pimage" type="file" accept="image/*"
-    onchange="fileName.textContent=this.files[0]?.name||'No file chosen'">
-   <label for="pimage" style="cursor:pointer">📷 Choose File</label>
-   <div id="fileName" class="muted">No file chosen</div>
-  </div>
- </div>
+<div class="field">
+<label>Image</label>
+<div class="file">
+<input id="pimage" type="file" accept="image/*">
+</div>
+</div>
 
- <div class="field">
-  <label>Description</label>
-  <textarea id="pdesc"
-   placeholder="Product description"></textarea>
- </div>
+<div class="field">
+<label>Description</label>
+<textarea id="pdesc" placeholder="Description"></textarea>
+</div>
 
- <button class="btn" style="width:100%" onclick="addProduct()">
-  ▣ Add Product
- </button>
+<button class="btn" style="width:100%" onclick="addProduct()">
+▣ Add Product
+</button>
 
- <div id="addMsg" class="msg"></div>
+<div id="msg" class="msg"></div>
 
 </section>
 
 </div>
-</main>
+</div>
 
-<!-- AUTH -->
+<!-- LOGIN -->
 
 <div class="modal" id="authM">
- <div class="box">
-  <button class="close" onclick="closeModals()">×</button>
-  <h2>Account Login</h2>
+<div class="box">
+<button class="close" onclick="closeAll()">×</button>
 
-  <div class="field">
-   <label>Email</label>
-   <input id="email" type="email" placeholder="Email">
-  </div>
+<h2>Login / Register</h2>
 
-  <div class="field">
-   <label>Password</label>
-   <input id="pass" type="password" placeholder="Password">
-  </div>
+<div class="field">
+<label>Email</label>
+<input id="email" type="email">
+</div>
 
-  <button class="btn" onclick="login()">Login</button>
-  <button class="btn" onclick="register()">Register</button>
+<div class="field">
+<label>Password</label>
+<input id="pass" type="password">
+</div>
 
-  <p id="authMsg" class="msg"></p>
- </div>
+<button class="btn" onclick="login()">Login</button>
+<button class="btn" onclick="register()">Register</button>
+
+<div id="authMsg" class="msg"></div>
+</div>
+</div>
+
+<!-- ORDER -->
+
+<div class="modal" id="orderM">
+<div class="box">
+<button class="close" onclick="closeAll()">×</button>
+
+<h2>Payment</h2>
+
+<div id="orderInfo"></div>
+
+<img src="payment-qr.jpg"
+style="width:220px;display:block;margin:15px auto;background:#fff;padding:5px">
+
+<div class="field">
+<label>UTR / Payment Reference *</label>
+<input id="utr">
+</div>
+
+<button class="btn" onclick="submitOrder()">Submit Order</button>
+
+<div id="orderMsg" class="msg"></div>
+</div>
 </div>
 
 <!-- ORDERS -->
 
 <div class="modal" id="ordersM">
- <div class="box">
-  <button class="close" onclick="closeModals()">×</button>
-  <h2>My Orders</h2>
-  <div id="ordersList"></div>
- </div>
+<div class="box">
+<button class="close" onclick="closeAll()">×</button>
+<h2>My Orders</h2>
+<div id="ordersList"></div>
 </div>
-
-<!-- ORDER PAYMENT -->
-
-<div class="modal" id="orderM">
- <div class="box">
-  <button class="close" onclick="closeModals()">×</button>
-  <h2>Complete Order</h2>
-
-  <div id="orderInfo" class="order"></div>
-
-  <p class="muted">QR से payment करें और UTR / payment reference submit करें.</p>
-
-  <img src="payment-qr.jpg"
-   style="width:220px;max-width:80%;display:block;margin:15px auto;background:#fff;padding:5px;border-radius:10px">
-
-  <div class="field">
-   <label>UTR / Payment Reference *</label>
-   <input id="utr" placeholder="Payment reference">
-  </div>
-
-  <div class="field">
-   <label>Note</label>
-   <textarea id="onote"></textarea>
-  </div>
-
-  <button class="btn" onclick="submitOrder()">Submit Order</button>
-
-  <p id="orderMsg" class="msg"></p>
- </div>
 </div>
 
 <!-- ADMIN -->
 
 <div class="modal" id="adminM">
- <div class="box">
-  <button class="close" onclick="closeModals()">×</button>
-  <h2>Admin Panel</h2>
-  <div id="adminContent">Loading...</div>
- </div>
+<div class="box">
+<button class="close" onclick="closeAll()">×</button>
+<h2>Admin Panel</h2>
+<div id="adminList"></div>
+</div>
 </div>
 
 <script>
@@ -351,564 +244,426 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 'sb_publishable_FKeym5pdwLyXioleSEiPAA_tUR2uyrD';
 
-const db = window.supabase.createClient(
- SUPABASE_URL,
- SUPABASE_KEY
+const db=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
-const ADMINS = [
- 'sslive965@gmail.com',
- 'gamingbind40054@gmail.com'
+const ADMINS=[
+'sslive965@gmail.com',
+'gamingbind40054@gmail.com'
 ];
 
 let products=[];
-let activeCat='All';
-let selectedProduct=null;
+let active='All';
+let selected=null;
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
-function closeModals(){
- document.querySelectorAll('.modal')
- .forEach(x=>x.classList.remove('show'));
+function closeAll(){
+document.querySelectorAll('.modal')
+.forEach(x=>x.classList.remove('show'));
 }
 
-function openAuth(){
- $('authM').classList.add('show');
+function auth(){
+$('authM').classList.add('show');
 }
 
-function openOrders(){
- $('ordersM').classList.add('show');
- loadOrders();
-}
-
-function openAdmin(){
- $('adminM').classList.add('show');
- loadAdmin();
-}
-
-async function user(){
- const {data} = await db.auth.getSession();
- return data?.session?.user || null;
+async function currentUser(){
+const {data}=await db.auth.getSession();
+return data.session?.user||null;
 }
 
 async function register(){
 
- const email=$('email').value.trim();
- const password=$('pass').value;
+const email=$('email').value.trim();
+const password=$('pass').value;
 
- if(!email || password.length<6){
-  $('authMsg').textContent='Email और कम से कम 6 character password डालें.';
-  return;
- }
+if(!email||password.length<6){
+$('authMsg').textContent=
+'Email और 6+ character password डालें.';
+return;
+}
 
- const {error}=await db.auth.signUp({
-  email,
-  password
- });
+const {error}=await db.auth.signUp({
+email,password
+});
 
- $('authMsg').textContent=error
- ? error.message
- : 'Registration successful. अब login करें.';
+$('authMsg').textContent=
+error?error.message:'Registration successful.';
 }
 
 async function login(){
 
- const email=$('email').value.trim();
- const password=$('pass').value;
+const {error}=await db.auth.signInWithPassword({
+email:$('email').value.trim(),
+password:$('pass').value
+});
 
- const {error}=await db.auth.signInWithPassword({
-  email,
-  password
- });
+$('authMsg').textContent=
+error?error.message:'Login successful.';
 
- if(error){
-  $('authMsg').textContent=error.message;
- }else{
-  $('authMsg').textContent='✅ Login successful';
-  setTimeout(closeModals,500);
- }
+if(!error)setTimeout(closeAll,500);
 }
 
 async function logout(){
- await db.auth.signOut();
- location.reload();
+await db.auth.signOut();
+location.reload();
 }
 
-function setCat(cat,btn){
+function cat(c,b){
 
- activeCat=cat;
+active=c;
 
- document.querySelectorAll('.filter')
- .forEach(x=>x.classList.remove('active'));
+document.querySelectorAll('.filter')
+.forEach(x=>x.classList.remove('active'));
 
- btn.classList.add('active');
+b.classList.add('active');
 
- render();
+render();
 }
 
 async function loadProducts(){
 
- $('products').innerHTML=
- '<div class="muted">Products loading...</div>';
+const {data,error}=await db
+.from('products')
+.select('*')
+.eq('active',true)
+.order('created_at',{ascending:false});
 
- const {data,error}=await db
- .from('products')
- .select('id,name,description,price,image_url,stock,category,validity,active,created_at')
- .eq('active',true)
- .order('created_at',{ascending:false});
+if(error){
+$('list').innerHTML=
+'<div class="err">Products load error.</div>';
+return;
+}
 
- if(error){
-  console.error(error);
-  $('products').innerHTML=
-  '<div class="err">Products load नहीं हो पाए. Refresh करें.</div>';
-  return;
- }
-
- products=data||[];
- render();
+products=data||[];
+render();
 }
 
 function render(){
 
- const q=($('search').value||'').toLowerCase();
+const q=$('search').value.toLowerCase();
 
- const rows=products.filter(p=>{
+const rows=products.filter(p=>
+(active==='All'||p.category===active)&&
+(!q||
+String(p.name||'').toLowerCase().includes(q)||
+String(p.description||'').toLowerCase().includes(q))
+);
 
-  const catOk =
-   activeCat==='All' ||
-   String(p.category||'Other')===activeCat;
-
-  const searchOk =
-   !q ||
-   String(p.name||'').toLowerCase().includes(q) ||
-   String(p.description||'').toLowerCase().includes(q);
-
-  return catOk && searchOk;
- });
-
- if(!rows.length){
-  $('products').innerHTML=
-   '<div class="muted">अभी कोई product नहीं है.</div>';
-  return;
- }
-
- $('products').innerHTML=rows.map(p=>{
-
-  const stock=Number(p.stock||0);
-
-  const image=p.image_url
-   ? `<img src="${p.image_url}" alt="">`
-   : `<div class="placeholder">AURA<br>JINWOO</div>`;
-
-  return `
-   <article class="product">
-    ${image}
-
-    <div class="muted">${escapeHtml(p.category||'Other')}</div>
-
-    <h3>${escapeHtml(p.name)}</h3>
-
-    <p class="muted">
-     ${escapeHtml(p.description||'Premium digital product')}
-    </p>
-
-    <p class="muted">
-     Validity: ${escapeHtml(p.validity||'As listed')}
-    </p>
-
-    <p class="muted">
-     Stock: ${stock}
-    </p>
-
-    <div class="price">
-     ₹${Number(p.price||0).toLocaleString('en-IN')}
-    </div>
-
-    <button class="buy"
-     onclick='buyProduct(${JSON.stringify(p).replace(/'/g,"&#39;")})'
-     ${stock<1?'disabled':''}>
-     Buy Now
-    </button>
-
-   </article>
-  `;
-
- }).join('');
+if(!rows.length){
+$('list').innerHTML=
+'<div class="muted">No products available.</div>';
+return;
 }
 
-function escapeHtml(s){
- return String(s??'').replace(/[&<>"']/g,c=>({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
- }[c]));
+$('list').innerHTML=rows.map(p=>`
+
+<div class="product">
+
+${p.image_url
+?`<img src="${p.image_url}">`
+:`<div class="placeholder">AURA<br>JINWOO</div>`}
+
+<div class="muted">${p.category||'Other'}</div>
+
+<h3>${escape(p.name)}</h3>
+
+<p class="muted">
+${escape(p.description||'')}
+</p>
+
+<p class="muted">
+Validity: ${escape(p.validity||'As listed')}
+</p>
+
+<p class="muted">
+Stock: ${p.stock}
+</p>
+
+<div class="price">
+₹${Number(p.price||0).toLocaleString('en-IN')}
+</div>
+
+<button class="buy"
+onclick="buy('${p.id}')">
+Buy Now
+</button>
+
+</div>
+
+`).join('');
 }
 
-async function buyProduct(p){
+function escape(x){
+return String(x??'')
+.replace(/&/g,'&amp;')
+.replace(/</g,'&lt;')
+.replace(/>/g,'&gt;')
+.replace(/"/g,'&quot;')
+.replace(/'/g,'&#39;');
+}
 
- const u=await user();
+async function buy(id){
 
- if(!u){
-  openAuth();
-  return;
- }
+const u=await currentUser();
 
- if(Number(p.stock||0)<1){
-  alert('Product out of stock.');
-  return;
- }
+if(!u){
+auth();
+return;
+}
 
- selectedProduct=p;
+selected=products.find(p=>String(p.id)===String(id));
 
- $('orderInfo').innerHTML=
- `<b>${escapeHtml(p.name)}</b><br>
- ₹${Number(p.price||0).toLocaleString('en-IN')}<br>
- Validity: ${escapeHtml(p.validity||'As listed')}`;
+$('orderInfo').innerHTML=
+`<div class="order">
+<b>${escape(selected.name)}</b><br>
+₹${Number(selected.price||0).toLocaleString('en-IN')}<br>
+Validity: ${escape(selected.validity||'As listed')}
+</div>`;
 
- $('orderM').classList.add('show');
+$('orderM').classList.add('show');
 }
 
 async function submitOrder(){
 
- const u=await user();
+const u=await currentUser();
 
- if(!u){
-  $('orderMsg').textContent='पहले login करें.';
-  return;
- }
-
- if(!selectedProduct){
-  $('orderMsg').textContent='Product select नहीं है.';
-  return;
- }
-
- const utr=$('utr').value.trim();
-
- if(!utr){
-  $('orderMsg').textContent='UTR / payment reference जरूरी है.';
-  return;
- }
-
- const {error}=await db
- .from('orders')
- .insert({
-  user_id:u.id,
-  product_id:selectedProduct.id,
-  utr:utr,
-  note:$('onote').value.trim(),
-  status:'pending'
- });
-
- if(error){
-  $('orderMsg').textContent='Save failed: '+error.message;
-  return;
- }
-
- $('orderMsg').innerHTML=
- '<span class="ok">✅ Order submit हो गया. Admin verification के बाद delivery होगी.</span>';
-
- $('utr').value='';
- $('onote').value='';
+if(!u){
+$('orderMsg').textContent='Login required.';
+return;
 }
 
-async function loadOrders(){
+const utr=$('utr').value.trim();
 
- const u=await user();
-
- if(!u){
-  $('ordersList').innerHTML=
-   '<p class="err">पहले login करें.</p>';
-  return;
- }
-
- const {data,error}=await db
- .from('orders')
- .select('id,utr,status,note,delivery_details,created_at,products(name,price,validity)')
- .eq('user_id',u.id)
- .order('created_at',{ascending:false});
-
- if(error){
-  $('ordersList').textContent=error.message;
-  return;
- }
-
- if(!data?.length){
-  $('ordersList').innerHTML=
-   '<p class="muted">अभी कोई order नहीं है.</p>';
-  return;
- }
-
- $('ordersList').innerHTML=data.map(o=>`
-  <div class="order">
-   <b>${escapeHtml(o.products?.name||'Product')}</b><br>
-   ₹${Number(o.products?.price||0).toLocaleString('en-IN')}<br>
-   Status: ${escapeHtml(o.status)}<br>
-   UTR: ${escapeHtml(o.utr)}
-   ${o.delivery_details
-    ? `<br><br><b>Delivery:</b><br>${escapeHtml(o.delivery_details)}`
-    : ''}
-  </div>
- `).join('');
+if(!utr){
+$('orderMsg').textContent='UTR required.';
+return;
 }
 
-async function loadAdmin(){
+const {error}=await db
+.from('orders')
+.insert({
+user_id:u.id,
+product_id:selected.id,
+utr:utr,
+status:'pending'
+});
 
- const u=await user();
+$('orderMsg').textContent=
+error?error.message:
+'✅ Order submitted successfully.';
 
- if(!u){
-  $('adminContent').innerHTML=
-   '<p class="err">पहले admin login करें.</p>';
-  return;
- }
-
- if(!ADMINS.includes((u.email||'').toLowerCase())){
-  $('adminContent').innerHTML=
-   '<p class="err">यह account admin नहीं है.</p>';
-  return;
- }
-
- const {data,error}=await db
- .from('products')
- .select('*')
- .order('created_at',{ascending:false});
-
- if(error){
-  $('adminContent').textContent=error.message;
-  return;
- }
-
- $('adminContent').innerHTML=`
-  <p class="ok">✅ Admin: ${escapeHtml(u.email)}</p>
-  <hr>
-  <h3>Products</h3>
-  ${data?.length
-   ? data.map(p=>`
-    <div class="order">
-     <b>${escapeHtml(p.name)}</b><br>
-     ₹${p.price} • ${escapeHtml(p.category||'Other')}
-     • Stock ${p.stock||0}<br>
-     Visibility: ${p.active?'Visible':'Hidden'}
-     <br><br>
-     <button class="btn"
-      onclick="toggleProduct('${p.id}',${!p.active})">
-      ${p.active?'Hide':'Show'}
-     </button>
-    </div>
-   `).join('')
-   : '<p class="muted">No products.</p>'
-  }
-
-  <hr>
-  <h3>Orders</h3>
- `;
-
- loadAdminOrders();
+if(!error)$('utr').value='';
 }
 
-async function loadAdminOrders(){
+async function orders(){
 
- const {data,error}=await db
- .from('orders')
- .select('id,utr,status,note,created_at,products(name,price)')
- .order('created_at',{ascending:false});
+const u=await currentUser();
 
- if(error){
-  $('adminContent').innerHTML+=
-   `<p class="err">${escapeHtml(error.message)}</p>`;
-  return;
- }
-
- $('adminContent').innerHTML+=data?.length
- ? data.map(o=>`
-   <div class="order">
-    <b>${escapeHtml(o.products?.name||'Product')}</b><br>
-    ₹${o.products?.price||0}<br>
-    UTR: ${escapeHtml(o.utr)}<br>
-    Status: ${escapeHtml(o.status)}<br><br>
-
-    <button class="btn"
-     onclick="setStatus('${o.id}','verified')">
-     Verify
-    </button>
-
-    <button class="btn"
-     onclick="setStatus('${o.id}','rejected')">
-     Reject
-    </button>
-
-    <button class="btn"
-     onclick="deliver('${o.id}')">
-     Deliver
-    </button>
-   </div>
-  `).join('')
- : '<p class="muted">No orders.</p>';
+if(!u){
+auth();
+return;
 }
 
-async function setStatus(id,status){
+$('ordersM').classList.add('show');
 
- const {error}=await db
- .from('orders')
- .update({status})
- .eq('id',id);
+const {data,error}=await db
+.from('orders')
+.select('*,products(name,price,validity)')
+.eq('user_id',u.id)
+.order('created_at',{ascending:false});
 
- if(error)alert(error.message);
- else loadAdmin();
+if(error){
+$('ordersList').textContent=error.message;
+return;
 }
 
-async function deliver(id){
-
- const d=prompt('Customer को क्या deliver करना है?');
-
- if(!d?.trim())return;
-
- const {error}=await db
- .from('orders')
- .update({
-  status:'delivered',
-  delivery_details:d.trim()
- })
- .eq('id',id);
-
- if(error)alert(error.message);
- else loadAdmin();
+$('ordersList').innerHTML=data?.length
+?data.map(o=>`
+<div class="order">
+<b>${escape(o.products?.name||'Product')}</b><br>
+₹${o.products?.price||0}<br>
+Status: ${escape(o.status)}<br>
+UTR: ${escape(o.utr)}
+</div>
+`).join('')
+:'<div class="muted">No orders.</div>';
 }
 
-async function toggleProduct(id,active){
+async function admin(){
 
- const {error}=await db
- .from('products')
- .update({active})
- .eq('id',id);
+$('adminM').classList.add('show');
 
- if(error)alert(error.message);
- else{
-  await loadProducts();
-  loadAdmin();
- }
+const u=await currentUser();
+
+if(!u){
+$('adminList').innerHTML=
+'<div class="err">Admin login required.</div>';
+return;
+}
+
+if(!ADMINS.includes(
+(u.email||'').toLowerCase()
+)){
+$('adminList').innerHTML=
+'<div class="err">This account is not admin.</div>';
+return;
+}
+
+const {data,error}=await db
+.from('products')
+.select('*')
+.order('created_at',{ascending:false});
+
+if(error){
+$('adminList').textContent=error.message;
+return;
+}
+
+$('adminList').innerHTML=data?.length
+?data.map(p=>`
+<div class="order">
+<b>${escape(p.name)}</b><br>
+₹${p.price} • Stock ${p.stock}<br>
+${p.active?'Visible':'Hidden'}<br><br>
+
+<button class="btn"
+onclick="toggle('${p.id}',${!p.active})">
+${p.active?'Hide':'Show'}
+</button>
+
+</div>
+`).join('')
+:'<div class="muted">No products.</div>';
+}
+
+async function toggle(id,active){
+
+const {error}=await db
+.from('products')
+.update({active})
+.eq('id',id);
+
+if(error)alert(error.message);
+else{
+await loadProducts();
+admin();
+}
 }
 
 async function addProduct(){
 
- const msg=$('addMsg');
- msg.textContent='';
+const msg=$('msg');
+msg.textContent='';
 
- try{
+const u=await currentUser();
 
-  const u=await user();
+if(!u){
+msg.innerHTML=
+'<span class="err">पहले admin login करें.</span>';
+auth();
+return;
+}
 
-  if(!u){
-   msg.innerHTML='<span class="err">पहले admin login करें.</span>';
-   openAuth();
-   return;
-  }
+if(!ADMINS.includes(
+(u.email||'').toLowerCase()
+)){
+msg.innerHTML=
+'<span class="err">यह account admin नहीं है.</span>';
+return;
+}
 
-  const email=(u.email||'').toLowerCase();
+const name=$('pname').value.trim();
+const priceText=$('pprice').value.trim();
+const validity=$('pvalid').value.trim();
+const category=$('pcat').value;
+const stockText=$('pstock').value.trim();
+const desc=$('pdesc').value.trim();
+const file=$('pimage').files?.[0];
 
-  if(!ADMINS.includes(email)){
-   msg.innerHTML=
-    '<span class="err">यह account admin नहीं है.</span>';
-   return;
-  }
+if(!name||
+priceText===''||
+stockText===''){
+msg.textContent=
+'Name, Price और Stock भरें.';
+return;
+}
 
-  const name=$('pname').value.trim();
-  const price=Number($('pprice').value);
-  const validity=$('pvalid').value.trim();
-  const category=$('pcat').value;
-  const stock=Number($('pstock').value);
-  const desc=$('pdesc').value.trim();
-  const file=$('pimage').files?.[0];
+const price=Number(priceText);
+const stock=Number(stockText);
 
-  if(!name ||
-     !Number.isFinite(price) ||
-     price<0 ||
-     !Number.isFinite(stock) ||
-     stock<0){
+if(!Number.isFinite(price)||
+!Number.isFinite(stock)){
+msg.textContent=
+'Price और Stock number होने चाहिए.';
+return;
+}
 
-   msg.innerHTML=
-    '<span class="err">Name, price और stock सही भरें.</span>';
-   return;
-  }
+let image_url=null;
 
-  let image_url=null;
+if(file){
 
-  if(file){
+image_url=await new Promise(resolve=>{
 
-   if(file.size>5*1024*1024){
-    msg.innerHTML=
-     '<span class="err">Image 5MB से छोटी रखें.</span>';
-    return;
-   }
+const reader=new FileReader();
 
-   image_url=await new Promise((resolve,reject)=>{
+reader.onload=()=>resolve(reader.result);
 
-    const reader=new FileReader();
+reader.onerror=()=>resolve(null);
 
-    reader.onload=()=>resolve(reader.result);
-    reader.onerror=reject;
+reader.onabort=()=>resolve(null);
 
-    reader.readAsDataURL(file);
+reader.readAsDataURL(file);
 
-   });
-  }
+});
 
-  msg.textContent='Product save हो रहा है...';
+}
 
-  const {error}=await db
-   .from('products')
-   .insert({
-    name:name,
-    price:price,
-    validity:validity,
-    category:category,
-    stock:stock,
-    description:desc,
-    image_url:image_url,
-    active:true
-   });
+msg.textContent='Product saving...';
 
-  if(error){
+const {error}=await db
+.from('products')
+.insert({
+name,
+price,
+validity,
+category,
+stock,
+description,
+image_url,
+active:true
+});
 
-   msg.innerHTML=
-    '<span class="err">Save failed: '+
-    escapeHtml(error.message)+
-    '</span>';
+if(error){
+msg.innerHTML=
+'<span class="err">'+
+escape(error.message)+
+'</span>';
+return;
+}
 
-   return;
-  }
+msg.innerHTML=
+'<span class="ok">✅ Product added successfully!</span>';
 
-  msg.innerHTML=
-   '<span class="ok">✅ Product successfully added!</span>';
+$('pname').value='';
+$('pprice').value='';
+$('pvalid').value='';
+$('pstock').value='';
+$('pdesc').value='';
+$('pimage').value='';
 
-  $('pname').value='';
-  $('pprice').value='';
-  $('pvalid').value='';
-  $('pstock').value=1;
-  $('pdesc').value='';
-  $('pimage').value='';
-  $('fileName').textContent='No file chosen';
+await loadProducts();
 
-  await loadProducts();
-
- }catch(e){
-
-  console.error(e);
-
-  msg.innerHTML=
-   '<span class="err">Error: '+
-   escapeHtml(e?.message||String(e))+
-   '</span>';
- }
 }
 
 document.addEventListener(
- 'DOMContentLoaded',
- loadProducts
+'DOMContentLoaded',
+loadProducts
 );
 
 </script>
 
 </body>
-  </html>
+ </html>
