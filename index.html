@@ -623,45 +623,65 @@ reader.readAsDataURL(file);
 
 msg.textContent='Product saving...';
 
-const {error}=await db
-.from('products')
-.insert({
-name,
-price,
-validity,
-category,
-stock,
-description,
-image_url,
-active:true
-});
+try {
 
-if(error){
-msg.innerHTML=
-'<span class="err">'+
-escape(error.message)+
-'</span>';
-return;
+  const insertPromise = db
+    .from('products')
+    .insert({
+      name: name,
+      price: price,
+      validity: validity,
+      category: category,
+      stock: stock,
+      description: description,
+      image_url: image_url || null,
+      active: true
+    });
+
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(
+      () => reject(new Error(
+        'Supabase request timeout. Database connection or permission check failed.'
+      )),
+      15000
+    )
+  );
+
+  const { error } = await Promise.race([
+    insertPromise,
+    timeoutPromise
+  ]);
+
+  if(error){
+    msg.innerHTML =
+      '<span class="err">❌ ' +
+      escape(error.message) +
+      '</span>';
+    console.error('Product insert error:', error);
+    return;
+  }
+
+  msg.innerHTML =
+    '<span class="ok">✅ Product added successfully!</span>';
+
+  $('pname').value='';
+  $('pprice').value='';
+  $('pvalid').value='';
+  $('pstock').value='';
+  $('pdesc').value='';
+  $('pimage').value='';
+
+  await loadProducts();
+
+} catch(err) {
+
+  console.error('Product save exception:', err);
+
+  msg.innerHTML =
+    '<span class="err">❌ ' +
+    escape(err.message || String(err)) +
+    '</span>';
 }
-
-msg.innerHTML=
-'<span class="ok">✅ Product added successfully!</span>';
-
-$('pname').value='';
-$('pprice').value='';
-$('pvalid').value='';
-$('pstock').value='';
-$('pdesc').value='';
-$('pimage').value='';
-
-await loadProducts();
-
-}
-
-document.addEventListener(
-'DOMContentLoaded',
-loadProducts
-);
 
 </script>
 
