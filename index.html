@@ -45,7 +45,7 @@ header{position:sticky;top:0;z-index:50;height:76px;border-bottom:1px solid #3a1
 
 <div id="platformModal" class="modal" aria-hidden="true"></div>
 <div id="authModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('authModal')">×</button><span class="eyebrow">ACCOUNT REQUIRED</span><h2 style="font:800 26px Orbitron">AURA JINWOO ACCESS</h2><div class="authTabs"><button class="pill active" id="loginTab" onclick="authMode('login')">Login</button><button class="pill" id="signupTab" onclick="authMode('signup')">Register</button></div><div class="authForm"><input id="authEmail" type="email" placeholder="Email address"><input id="authPass" type="password" placeholder="Password"><button class="cta" id="authAction" onclick="submitAuth()">Login</button><div id="authMsg" class="status"></div></div></div></div>
-<div id="buyModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('buyModal')">×</button><span class="eyebrow">ORDER PAYMENT</span><h2 id="buyTitle" style="font:800 25px Orbitron"></h2><p id="buyPrice" class="muted"></p><img id="qr" class="qr" src="payment-qr.jpg" alt="Payment QR"><button id="upiPayBtn" class="cta" style="width:100%;margin-top:10px" onclick="payViaUPI()">Pay via UPI App</button><div class="notice" style="margin-top:10px">Pay using the UPI button or scan the QR. After payment, enter your UTR below. Orders are manually verified by the admin.</div><input id="utr" class="delivery" placeholder="Enter UTR / transaction reference"><button class="cta" style="width:100%;margin-top:10px" onclick="placeOrder()">Submit Order</button><div id="buyMsg" class="status"></div></div></div>
+<div id="buyModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('buyModal')">×</button><span class="eyebrow">ORDER PAYMENT</span><h2 id="buyTitle" style="font:800 25px Orbitron"></h2><p id="buyPrice" class="muted"></p><img id="qr" class="qr" src="payment-qr.jpg" alt="Payment QR"><button id="upiPayBtn" class="cta upiButton" style="width:100%;margin-top:12px;background:linear-gradient(90deg,#00aaff,#7b2cff);box-shadow:0 0 24px rgba(0,170,255,.35)" onclick="payViaUPI()">📱 Pay via UPI App</button><div style="text-align:center;margin-top:8px;color:#aab4d6;font-size:13px">UPI ID: jinwoo40054@ptaxis</div><div class="notice" style="margin-top:10px">Pay using the UPI button or scan the QR. After payment, enter your UTR below. Orders are manually verified by the admin.</div><input id="utr" class="delivery" placeholder="Enter UTR / transaction reference"><button class="cta" style="width:100%;margin-top:10px" onclick="placeOrder()">Submit Order</button><div id="buyMsg" class="status"></div></div></div>
 <script>
 const db=window.supabase.createClient('https://zksdzoxmxbqqochmwxhf.supabase.co','sb_publishable_FKeym5pdwLyXioleSEiPAA_tUR2uyrD');
 const ADM=['sslive965@gmail.com','gamingbind40054@gmail.com'];
@@ -120,7 +120,12 @@ function payViaUPI(){
   const amount=Number(buyProduct.price);
   if(!Number.isFinite(amount)||amount<=0){$('buyMsg').innerHTML='<span class="err">Invalid payment amount.</span>';return}
   const params=new URLSearchParams({pa:'jinwoo40054@ptaxis',pn:'AURA JINWOO STORE',am:amount.toFixed(2),cu:'INR',tn:buyProduct.name.slice(0,80)});
-  window.location.href='upi://pay?'+params.toString();
+  const uri='upi://pay?'+params.toString();
+  $('buyMsg').innerHTML='<span class="ok">Opening your UPI app…</span>';
+  window.location.href=uri;
+  setTimeout(()=>{
+    $('buyMsg').innerHTML='<span class="notice">If no UPI app opened, scan the QR above or try the button again.</span>';
+  },1500);
 }
 async function placeOrder(){
   if(!user){closeModal('buyModal');openAuth();return}
