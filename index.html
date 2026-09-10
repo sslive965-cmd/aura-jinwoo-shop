@@ -45,7 +45,7 @@ header{position:sticky;top:0;z-index:50;height:76px;border-bottom:1px solid #3a1
 
 <div id="platformModal" class="modal" aria-hidden="true"></div>
 <div id="authModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('authModal')">×</button><span class="eyebrow">ACCOUNT REQUIRED</span><h2 style="font:800 26px Orbitron">AURA JINWOO ACCESS</h2><div class="authTabs"><button class="pill active" id="loginTab" onclick="authMode('login')">Login</button><button class="pill" id="signupTab" onclick="authMode('signup')">Register</button></div><div class="authForm"><input id="authEmail" type="email" placeholder="Email address"><input id="authPass" type="password" placeholder="Password"><button class="cta" id="authAction" onclick="submitAuth()">Login</button><div id="authMsg" class="status"></div></div></div></div>
-<div id="buyModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('buyModal')">×</button><span class="eyebrow">ORDER PAYMENT</span><h2 id="buyTitle" style="font:800 25px Orbitron"></h2><p id="buyPrice" class="muted"></p><img id="qr" class="qr" src="payment-qr.jpg" alt="Payment QR"><div class="notice">Pay the displayed amount using the QR, then enter your UTR below. Orders are manually verified by the admin.</div><input id="utr" class="delivery" placeholder="Enter UTR / transaction reference"><button class="cta" style="width:100%;margin-top:10px" onclick="placeOrder()">Submit Order</button><div id="buyMsg" class="status"></div></div></div>
+<div id="buyModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('buyModal')">×</button><span class="eyebrow">ORDER PAYMENT</span><h2 id="buyTitle" style="font:800 25px Orbitron"></h2><p id="buyPrice" class="muted"></p><img id="qr" class="qr" src="payment-qr.jpg" alt="Payment QR"><button id="upiPayBtn" class="cta" style="width:100%;margin-top:10px" onclick="payViaUPI()">Pay via UPI App</button><div class="notice" style="margin-top:10px">Pay using the UPI button or scan the QR. After payment, enter your UTR below. Orders are manually verified by the admin.</div><input id="utr" class="delivery" placeholder="Enter UTR / transaction reference"><button class="cta" style="width:100%;margin-top:10px" onclick="placeOrder()">Submit Order</button><div id="buyMsg" class="status"></div></div></div>
 <script>
 const db=window.supabase.createClient('https://zksdzoxmxbqqochmwxhf.supabase.co','sb_publishable_FKeym5pdwLyXioleSEiPAA_tUR2uyrD');
 const ADM=['sslive965@gmail.com','gamingbind40054@gmail.com'];
@@ -113,7 +113,15 @@ function toggleMenu(){const n=$('links'),b=$('hambBtn');if(!n)return;const open=
 
 async function loadProducts(){const {data,error}=await db.from('products').select('*').order('created_at',{ascending:false});if(error){$('products').innerHTML='<div class="empty">'+esc(error.message)+'</div>';return}products=data||[];renderProducts()}
 function renderProducts(){const q=($('search').value||'').toLowerCase();const list=products.filter(p=>p.active!==false&&(cat==='All'||p.category===cat)&&((p.name||'').toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q)));$('products').innerHTML=list.length?list.map(p=>`<article class="card"><div class="visual">${p.image_url?`<img src="${esc(p.image_url)}" alt="">`:`<div class="fakeCard"><strong>${esc((p.category||'DIGITAL').toUpperCase())}</strong><em>AURA JINWOO</em><div class="chip"></div><small>PREMIUM DIGITAL PRODUCT</small></div>`}</div><div class="tagrow"><span class="tag">${esc(p.category||'Other')}</span><span class="stock">${Number(p.stock)>0?esc(p.stock)+' in stock':'Out of stock'}</span></div><h3>${esc(p.name)}</h3><div class="desc">${esc(p.description||'Premium digital product.')}</div><div class="meta"><span>Card Expiry<b>${esc(p.card_expiry||'—')}</b></span><span>Stock<b>${esc(p.stock)}</b></span></div><div class="buyrow"><span class="price">₹${esc(p.price)}</span><button class="buy" ${Number(p.stock)<=0?'disabled':''} onclick="openBuy(${p.id})">Buy</button></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">No products found.</div>'}
-function openBuy(id){buyProduct=products.find(p=>p.id===id);if(!buyProduct)return;modal('buyModal');$('buyTitle').textContent=buyProduct.name;$('buyPrice').textContent='Amount to pay: ₹'+buyProduct.price;$('utr').value='';$('buyMsg').textContent=''}
+function openBuy(id){buyProduct=products.find(p=>p.id===id);if(!buyProduct)return;modal('buyModal');$('buyTitle').textContent=buyProduct.name;$('buyPrice').textContent='Amount to pay: ₹'+buyProduct.price;$('utr').value='';$('buyMsg').textContent='';$('upiPayBtn').disabled=false}
+
+function payViaUPI(){
+  if(!buyProduct){$('buyMsg').innerHTML='<span class="err">Product unavailable.</span>';return}
+  const amount=Number(buyProduct.price);
+  if(!Number.isFinite(amount)||amount<=0){$('buyMsg').innerHTML='<span class="err">Invalid payment amount.</span>';return}
+  const params=new URLSearchParams({pa:'jinwoo40054@ptaxis',pn:'AURA JINWOO STORE',am:amount.toFixed(2),cu:'INR',tn:buyProduct.name.slice(0,80)});
+  window.location.href='upi://pay?'+params.toString();
+}
 async function placeOrder(){
   if(!user){closeModal('buyModal');openAuth();return}
   if(!buyProduct){$('buyMsg').innerHTML='<span class="err">Product unavailable.</span>';return}
@@ -121,7 +129,7 @@ async function placeOrder(){
   const utr=$('utr').value.trim();
   if(!utr){$('buyMsg').innerHTML='<span class="err">UTR is required.</span>';return}
   $('buyMsg').textContent='Submitting order...';
-  const {error}=await db.from('orders').insert({user_id:user.id,product_id:buyProduct.id,utr,note:'QR payment submitted',status:'pending'});
+  const {error}=await db.from('orders').insert({user_id:user.id,product_id:buyProduct.id,utr,note:'UPI/QR payment submitted',status:'pending'});
   if(error){$('buyMsg').innerHTML='<span class="err">'+esc(error.message)+'</span>';return}
   closeModal('buyModal');
   await loadMyOrders();
