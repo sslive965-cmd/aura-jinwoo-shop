@@ -51,6 +51,53 @@ header{background:rgba(3,4,12,.72);border-bottom-color:rgba(111,57,255,.45);box-
 @media(max-width:700px){.jinwooBg{opacity:.32;background-position:58% 16%;animation-duration:22s}.heroCard{min-height:560px;text-align:center;background:linear-gradient(180deg,rgba(5,6,16,.91),rgba(5,5,15,.66))}.heroCard .heroInner{padding:36px 10px}.heroVisual{position:relative;right:auto;bottom:auto;width:78%;margin:0 auto 8px;transform:rotate(-3deg);opacity:.58}.heroCard{display:flex;flex-direction:column;justify-content:center}.heroVisual{order:2}.heroInner{order:1}}
 @media(prefers-reduced-motion:reduce){.jinwooBg{animation:none}}
 
+
+/* V14 mobile menu fix: keep menu above page content and prevent text overlap */
+header{z-index:1000}
+@media(max-width:980px){
+  .links.mobileOpen{
+    position:fixed!important;
+    z-index:10000!important;
+    top:76px!important;
+    left:12px!important;
+    right:12px!important;
+    width:auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:4px!important;
+    padding:12px!important;
+    max-height:calc(100vh - 92px)!important;
+    overflow-y:auto!important;
+    background:#070812!important;
+    background-color:#070812!important;
+    opacity:1!important;
+    backdrop-filter:blur(24px)!important;
+    -webkit-backdrop-filter:blur(24px)!important;
+    border:1px solid #6540d9!important;
+    border-radius:18px!important;
+    box-shadow:0 24px 70px rgba(0,0,0,.9),0 0 35px rgba(111,60,255,.25)!important;
+  }
+  .links.mobileOpen button{
+    display:block!important;
+    width:100%!important;
+    min-height:48px!important;
+    padding:12px 14px!important;
+    margin:0!important;
+    text-align:left!important;
+    font:600 16px/1.2 Inter,sans-serif!important;
+    color:#eeeaff!important;
+    background:rgba(17,12,39,.96)!important;
+    border:1px solid rgba(101,64,217,.35)!important;
+    border-radius:12px!important;
+    white-space:normal!important;
+  }
+  .links.mobileOpen button:hover,.links.mobileOpen button.active{
+    color:#fff!important;
+    background:linear-gradient(100deg,rgba(91,44,255,.5),rgba(0,124,255,.28))!important;
+    border-color:#8a63ff!important;
+    box-shadow:0 0 18px rgba(102,68,255,.2)!important;
+  }
+}
 </style>
 </head>
 <body class="platform-locked">
