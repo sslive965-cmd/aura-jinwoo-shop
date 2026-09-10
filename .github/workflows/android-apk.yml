@@ -9,7 +9,7 @@ jobs:
 
     steps:
 
-    # Get files from the GitHub repository
+    # Checkout repository so the app logo can be used
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -20,7 +20,7 @@ jobs:
         mkdir -p app/src/main/res/values
         mkdir -p app/src/main/res/drawable-nodpi
 
-        # Copy AURA JINWOO STORE logo as app icon
+        # Use AURA JINWOO STORE logo as Android app icon
         cp app-icon.png app/src/main/res/drawable-nodpi/app_icon.png
 
         cat > settings.gradle <<'EOF'
@@ -80,6 +80,23 @@ jobs:
         </resources>
         EOF
 
+        cat > app/src/main/res/values/styles.xml <<'EOF'
+        <resources>
+
+        <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
+
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:colorAccent">#7C4DFF</item>
+        <item name="android:navigationBarColor">#02030A</item>
+        <item name="android:statusBarColor">#02030A</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        </style>
+
+        </resources>
+        EOF
+
         cat > app/src/main/AndroidManifest.xml <<'EOF'
         <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -107,23 +124,6 @@ jobs:
         </application>
 
         </manifest>
-        EOF
-
-        cat > app/src/main/res/values/styles.xml <<'EOF'
-        <resources>
-
-        <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
-
-        <item name="android:fontFamily">sans</item>
-        <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:colorAccent">#7C4DFF</item>
-        <item name="android:navigationBarColor">#02030A</item>
-        <item name="android:statusBarColor">#02030A</item>
-        <item name="android:windowLightStatusBar">false</item>
-
-        </style>
-
-        </resources>
         EOF
 
         cat > app/src/main/java/com/aura/jinwoostore/MainActivity.java <<'EOF'
