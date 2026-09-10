@@ -328,6 +328,156 @@ header{z-index:1000}
 }
 </style>
 
+
+<style id="v24-ultra-aura">
+/* V24 visual-only enhancement: dramatic 3D Aura treatment */
+.grid{perspective:1800px;perspective-origin:50% 35%}
+.card{
+  position:relative!important;
+  overflow:hidden!important;
+  transform-style:preserve-3d!important;
+  isolation:isolate;
+  border:1px solid #7c3cff!important;
+  background:
+    radial-gradient(ellipse at 50% 0%,#7c3cff22,transparent 42%),
+    radial-gradient(ellipse at 100% 100%,#27c8ff18,transparent 45%),
+    linear-gradient(145deg,#111832f7 0%,#070a17fa 58%,#03040bf9 100%)!important;
+  box-shadow:
+    0 35px 70px #000d,
+    0 0 0 1px #27c8ff14,
+    0 0 45px #7c3cff28,
+    inset 0 1px 0 #ffffff20,
+    inset 0 -25px 50px #0008!important;
+}
+.card:before{
+  content:""!important;
+  position:absolute!important;
+  inset:-2px!important;
+  z-index:-1!important;
+  border-radius:inherit!important;
+  background:conic-gradient(from 180deg,#7c3cff,#39c8ff,#b33cff,#5b2cff,#39c8ff,#7c3cff)!important;
+  filter:blur(8px)!important;
+  opacity:.7!important;
+  animation:v24AuraSpin 7s linear infinite!important;
+}
+.card:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:3!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(115deg,transparent 15%,#ffffff08 28%,#39c8ff18 39%,transparent 50%),
+    radial-gradient(circle at 50% 105%,#39c8ff12,transparent 38%)!important;
+  background-size:220% 100%,100% 100%!important;
+  animation:v24CardSweep 4.8s ease-in-out infinite!important;
+  border-radius:inherit!important;
+}
+.card:hover{
+  transform:translateY(-14px) rotateX(4deg) rotateY(-4deg) scale(1.018)!important;
+  box-shadow:
+    0 45px 90px #000e,
+    0 0 70px #7c3cff42,
+    0 0 110px #27c8ff20,
+    inset 0 1px 0 #ffffff2a,
+    inset 0 -30px 55px #0009!important;
+}
+.visual{
+  height:230px!important;
+  transform:translateZ(35px)!important;
+  border:1px solid #6ea6ff88!important;
+  background:
+    radial-gradient(circle at 50% 50%,#376bff30,transparent 42%),
+    radial-gradient(circle at 20% 20%,#a83dff22,transparent 35%),
+    linear-gradient(145deg,#0b1026,#101b3c 48%,#050714)!important;
+  box-shadow:
+    0 20px 38px #000b,
+    inset 0 0 35px #000b,
+    inset 0 1px 0 #ffffff18,
+    0 0 32px #356dff22!important;
+}
+.visual:after{
+  content:""!important;
+  position:absolute!important;
+  width:55%!important;
+  height:55%!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle,#39c8ff22,transparent 68%)!important;
+  filter:blur(8px)!important;
+  pointer-events:none!important;
+  animation:v24Pulse 2.8s ease-in-out infinite!important;
+}
+.visual img{
+  width:88%!important;
+  height:88%!important;
+  object-fit:cover!important;
+  transform:perspective(900px) rotateX(7deg) rotateY(-7deg) rotateZ(-3deg) translateZ(55px)!important;
+  border:1px solid #9bbcffbb!important;
+  box-shadow:
+    18px 25px 45px #000d,
+    0 0 35px #367dff45,
+    0 0 70px #7c3cff18!important;
+}
+.card:hover .visual img{
+  transform:perspective(900px) rotateX(3deg) rotateY(-3deg) rotateZ(-1deg) translateY(-7px) translateZ(75px) scale(1.035)!important;
+  box-shadow:
+    22px 32px 55px #000e,
+    0 0 45px #367dff65,
+    0 0 85px #7c3cff28!important;
+}
+.tagrow,.card h3,.desc,.meta,.buyrow{
+  transform:translateZ(24px)!important;
+}
+.tag{
+  border-color:#8a4cffaa!important;
+  box-shadow:0 0 18px #7c3cff20,inset 0 1px 0 #ffffff16!important;
+}
+.meta span{
+  border-color:#5532b977!important;
+  box-shadow:inset 0 1px 0 #ffffff12,0 0 16px #27c8ff0b!important;
+}
+.buy{
+  transform:translateZ(30px)!important;
+  background:linear-gradient(115deg,#5b20ff,#1d78ff 48%,#b43cff)!important;
+  box-shadow:
+    0 13px 30px #4c24ff66,
+    0 0 25px #39c8ff25,
+    inset 0 1px 0 #ffffff55!important;
+}
+.buy:hover:not(:disabled){
+  transform:translateZ(38px) translateY(-3px) scale(1.05)!important;
+  box-shadow:
+    0 18px 38px #4c24ff85,
+    0 0 38px #39c8ff42,
+    inset 0 1px 0 #ffffff66!important;
+}
+@media(min-width:1001px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:28px!important}
+  .card{min-height:545px!important}
+  .visual{height:245px!important}
+  .card:nth-child(2n){transform:translateY(12px) rotateY(1deg)}
+  .card:nth-child(3n){transform:translateY(-4px) rotateY(-1deg)}
+  .card:nth-child(2n):hover,.card:nth-child(3n):hover{transform:translateY(-10px) rotateX(4deg) rotateY(-3deg) scale(1.018)!important}
+}
+@media(max-width:620px){
+  .visual{height:205px!important}
+  .card{border-radius:25px!important}
+  .visual img{transform:perspective(800px) rotateX(6deg) rotateY(-5deg) rotateZ(-3deg) translateZ(42px)!important}
+}
+@keyframes v24AuraSpin{to{transform:rotate(360deg)}}
+@keyframes v24CardSweep{
+  0%,100%{background-position:-120% 0,0 0}
+  50%{background-position:120% 0,0 0}
+}
+@keyframes v24Pulse{
+  0%,100%{opacity:.35;transform:scale(.8)}
+  50%{opacity:.9;transform:scale(1.15)}
+}
+@media(prefers-reduced-motion:reduce){
+  .card:before,.card:after,.visual:after{animation:none!important}
+}
+</style>
+
 </head>
 <body class="platform-locked">
 <div class="jinwooBg" aria-hidden="true"></div>
