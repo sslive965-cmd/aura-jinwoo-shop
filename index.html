@@ -586,6 +586,149 @@ header:after{content:"";position:absolute;left:18px;right:18px;bottom:-1px;heigh
 @media(prefers-reduced-motion:reduce){.jinwooBg,.heroVisual img,.fakeCard,.card:before,.visual:after{animation:none!important}}
 </style>
 
+<style id="aura-card-reference-v27">
+/* V27 — product-card redesign based on the user's supplied reference image.
+   Functional JavaScript, Supabase, auth, admin, orders and payment flow remain unchanged. */
+:root{--v27-blue:#168cff;--v27-cyan:#23eaff;--v27-purple:#8b2cff;--v27-pink:#d83dff}
+.section#shop{padding-top:22px}
+.section#shop .sectionHead{position:relative;z-index:4}
+.section#shop .grid{gap:26px;align-items:stretch}
+.card{
+  position:relative!important;
+  min-height:560px!important;
+  padding:14px!important;
+  border:1px solid rgba(51,151,255,.95)!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 50% 28%,rgba(0,127,255,.18),transparent 30%),
+    linear-gradient(145deg,rgba(2,18,47,.98),rgba(3,7,24,.99) 58%,rgba(18,4,39,.98))!important;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.82),
+    0 0 0 1px rgba(44,118,255,.22),
+    0 0 34px rgba(15,128,255,.28),
+    inset 0 0 45px rgba(39,87,255,.12)!important;
+  overflow:hidden!important;
+  transform-style:preserve-3d!important;
+}
+.card:before{
+  content:""!important;position:absolute!important;inset:0!important;z-index:0!important;
+  border-radius:29px!important;pointer-events:none!important;
+  background:
+    linear-gradient(118deg,transparent 16%,rgba(91,212,255,.13) 31%,transparent 43%),
+    linear-gradient(300deg,transparent 42%,rgba(190,61,255,.10) 52%,transparent 63%)!important;
+  background-size:240% 100%,220% 100%!important;
+  animation:v27Sweep 4.6s ease-in-out infinite!important;
+  mix-blend-mode:screen!important;
+}
+.card:after{
+  content:""!important;position:absolute!important;inset:1px!important;z-index:0!important;
+  border-radius:28px!important;pointer-events:none!important;
+  border:1px solid rgba(103,70,255,.36)!important;
+  box-shadow:inset 0 0 45px rgba(0,122,255,.08),inset 0 0 0 1px rgba(255,255,255,.03)!important;
+}
+@keyframes v27Sweep{0%,100%{background-position:-120% 0,120% 0}50%{background-position:120% 0,-120% 0}}
+.card>*{position:relative;z-index:2}
+.visual{
+  height:305px!important;
+  margin:0 0 8px!important;
+  border-radius:22px!important;
+  position:relative!important;
+  overflow:hidden!important;
+  display:grid!important;place-items:center!important;
+  perspective:1300px!important;
+  transform-style:preserve-3d!important;
+  background:
+    radial-gradient(ellipse at 50% 75%,rgba(0,163,255,.32),transparent 33%),
+    radial-gradient(circle at 50% 35%,rgba(42,81,255,.18),transparent 45%),
+    linear-gradient(145deg,#02091a,#071a45 48%,#09031e 100%)!important;
+  border:1px solid rgba(57,159,255,.8)!important;
+  box-shadow:
+    inset 0 0 35px rgba(0,122,255,.18),
+    0 0 18px rgba(0,123,255,.15)!important;
+}
+.visual:before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(115deg,transparent 20%,rgba(255,255,255,.06) 39%,transparent 49%),
+    radial-gradient(circle at 18% 78%,rgba(44,194,255,.48) 0 1px,transparent 2px),
+    radial-gradient(circle at 84% 34%,rgba(175,65,255,.42) 0 1px,transparent 2px),
+    radial-gradient(circle at 76% 76%,rgba(37,224,255,.45) 0 1px,transparent 2px);
+  background-size:230% 100%,80px 80px,110px 110px,95px 95px;
+  animation:v27VisualSweep 5s ease-in-out infinite;
+}
+@keyframes v27VisualSweep{0%,100%{background-position:-120% 0,0 0,0 0,0 0}50%{background-position:120% 0,12px -10px,-8px 12px,9px 8px}}
+.visual:after{
+  content:"";position:absolute;left:8%;right:8%;bottom:16px;height:46px;z-index:1;
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(23,213,255,.76),rgba(22,102,255,.34) 35%,transparent 72%);
+  filter:blur(8px);animation:v27PlatformGlow 2.6s ease-in-out infinite;
+}
+@keyframes v27PlatformGlow{0%,100%{opacity:.65;transform:scale(.92)}50%{opacity:1;transform:scale(1.08)}}
+.visual .fakeCard{
+  position:relative!important;z-index:3!important;
+  width:72%!important;aspect-ratio:1.58!important;
+  padding:18px!important;border-radius:18px!important;
+  transform:perspective(1200px) rotateX(8deg) rotateY(-13deg) rotateZ(-6deg) translate3d(0,-8px,70px)!important;
+  background:
+    linear-gradient(145deg,rgba(7,35,91,.98),rgba(14,93,205,.98) 45%,rgba(1,9,30,.99) 100%)!important;
+  border:1px solid rgba(99,201,255,.98)!important;
+  box-shadow:
+    18px 25px 45px rgba(0,0,0,.86),
+    0 0 28px rgba(16,145,255,.62),
+    0 0 70px rgba(0,113,255,.25),
+    inset 0 0 28px rgba(126,224,255,.12)!important;
+  animation:v27CardFloat 4.8s ease-in-out infinite!important;
+  overflow:hidden!important;
+}
+.visual .fakeCard:before{
+  content:"";position:absolute;inset:-50%;z-index:1;pointer-events:none;
+  background:linear-gradient(112deg,transparent 40%,rgba(255,255,255,.35) 48%,rgba(72,205,255,.18) 52%,transparent 59%);
+  transform:translateX(-45%) rotate(7deg);animation:v27CardGlint 3.4s linear infinite;
+}
+.visual .fakeCard strong,.visual .fakeCard em,.visual .fakeCard .chip,.visual .fakeCard small{position:relative;z-index:2}
+.visual .fakeCard strong{font:900 22px Orbitron!important;letter-spacing:-.8px;text-shadow:0 0 15px rgba(210,244,255,.75)!important}
+.visual .fakeCard em{font-size:9px!important;color:#d2ebff!important}
+.visual .fakeCard .chip{width:38px!important;height:26px!important;border-radius:6px!important;margin:22px 0 18px!important;background:linear-gradient(135deg,#ffe9a8,#a98954)!important;box-shadow:0 0 18px rgba(255,222,137,.38)!important}
+.visual .fakeCard small{font-size:8px!important;letter-spacing:1.2px!important;color:#edf7ff!important}
+@keyframes v27CardFloat{0%,100%{transform:perspective(1200px) rotateX(8deg) rotateY(-13deg) rotateZ(-6deg) translate3d(0,-8px,70px)}50%{transform:perspective(1200px) rotateX(11deg) rotateY(-7deg) rotateZ(-3deg) translate3d(0,-22px,92px)}}
+@keyframes v27CardGlint{0%{transform:translateX(-55%) rotate(7deg)}100%{transform:translateX(55%) rotate(7deg)}}
+.card[data-category="MasterCard"] .visual{background:radial-gradient(ellipse at 50% 76%,rgba(204,54,255,.38),transparent 35%),linear-gradient(145deg,#08021d,#22074d 52%,#06091b)!important;border-color:rgba(207,61,255,.9)!important;box-shadow:inset 0 0 38px rgba(201,51,255,.18),0 0 22px rgba(207,61,255,.18)!important}
+.card[data-category="MasterCard"] .visual:after{background:radial-gradient(ellipse,rgba(217,58,255,.82),rgba(107,35,255,.36) 38%,transparent 72%)}
+.card[data-category="MasterCard"] .fakeCard{background:linear-gradient(145deg,#170633,#6b20c9 45%,#09031b)!important;border-color:#e079ff!important;box-shadow:18px 25px 45px rgba(0,0,0,.86),0 0 32px rgba(217,59,255,.72),0 0 72px rgba(166,45,255,.26),inset 0 0 28px rgba(255,110,255,.13)!important}
+.card[data-category="MasterCard"] .tag{border-color:#a746e8!important;color:#efc8ff!important;background:rgba(129,37,180,.18)!important}
+.card[data-category="MasterCard"] .buy{background:linear-gradient(105deg,#7b25ff,#c92cff,#f04dff)!important}
+.card[data-category="RuPay"] .visual{background:radial-gradient(ellipse at 50% 76%,rgba(0,210,255,.42),transparent 35%),linear-gradient(145deg,#021229,#063c69 52%,#08031b)!important}
+.card[data-category="RuPay"] .fakeCard{background:linear-gradient(145deg,#06244a,#087fca 45%,#07071b)!important;border-color:#5cecff!important}
+.card[data-category="RuPay"] .tag{border-color:#20a7d7!important;color:#b8f5ff!important}
+.card[data-category="RuPay"] .buy{background:linear-gradient(105deg,#006eff,#00bfff 52%,#6731ff)!important}
+.tagrow{margin:12px 4px 7px!important}.tag{padding:7px 12px!important;border-radius:11px!important;font-size:11px!important;background:rgba(17,19,55,.75)!important;box-shadow:inset 0 0 12px rgba(83,52,255,.12)!important}.stock{font-size:12px!important;font-weight:800!important;text-shadow:0 0 13px rgba(31,238,177,.42)!important}
+.card h3{font-size:21px!important;margin:8px 4px 4px!important;text-shadow:0 0 13px rgba(213,231,255,.14)}
+.desc{font-size:12px!important;min-height:38px!important;margin:0 4px!important;color:#9eb0cf!important}
+.meta{gap:12px!important;margin:14px 4px!important}.meta span{padding:11px!important;border-radius:11px!important;border-color:rgba(49,126,225,.58)!important;background:linear-gradient(145deg,rgba(5,17,42,.8),rgba(4,7,24,.88))!important;box-shadow:inset 0 0 18px rgba(0,114,255,.08)!important;font-size:10px!important}.meta b{font-size:12px!important}
+.buyrow{margin:2px 4px 0!important;align-items:center!important}.price{font-size:27px!important;color:#dff8ff!important;text-shadow:0 0 15px rgba(30,161,255,.75)!important}.buy{min-width:145px!important;padding:13px 20px!important;border-radius:14px!important;border:1px solid rgba(86,213,255,.7)!important;box-shadow:0 0 24px rgba(32,139,255,.35),inset 0 1px 0 rgba(255,255,255,.22)!important}
+.card:hover{transform:translateY(-10px) rotateX(1.5deg) rotateY(-1deg)!important;border-color:#53c8ff!important;box-shadow:0 38px 90px rgba(0,0,0,.9),0 0 48px rgba(32,155,255,.34),0 0 0 1px rgba(203,73,255,.22)!important}
+.card:hover .fakeCard{animation-play-state:paused;transform:perspective(1200px) rotateX(12deg) rotateY(-16deg) rotateZ(-7deg) translate3d(0,-22px,100px)!important}
+@media(min-width:1001px){
+ .section#shop .grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:28px!important}
+ .section#shop .card:nth-child(2){transform:translateY(12px) rotateY(-1deg)!important}
+ .section#shop .card:nth-child(3){transform:translateY(-3px) rotateY(1deg)!important}
+ .section#shop .card:nth-child(2):hover,.section#shop .card:nth-child(3):hover{transform:translateY(-10px) rotateX(2deg) rotateY(-2deg) scale(1.012)!important}
+}
+@media(max-width:1000px){.card{min-height:540px!important}.visual{height:285px!important}}
+@media(max-width:700px){
+ .section#shop .grid{gap:22px!important}
+ .card{min-height:540px!important;border-radius:26px!important;padding:13px!important}
+ .visual{height:285px!important;border-radius:21px!important}
+ .visual .fakeCard{width:78%!important}
+ .card:hover{transform:none!important}
+ .card:hover .fakeCard{transform:perspective(1200px) rotateX(8deg) rotateY(-13deg) rotateZ(-6deg) translate3d(0,-8px,70px)!important}
+ .card h3{font-size:20px!important}
+ .price{font-size:25px!important}.buy{min-width:132px!important;padding:12px 16px!important}
+}
+@media(max-width:430px){.card{min-height:535px!important}.visual{height:270px!important}.visual .fakeCard{width:80%!important}.meta{gap:9px!important}.buy{min-width:128px!important}}
+@media(prefers-reduced-motion:reduce){.card:before,.visual:before,.visual:after,.visual .fakeCard,.visual .fakeCard:before{animation:none!important}}
+</style>
+
 </head>
 <body class="platform-locked">
 <div class="jinwooBg" aria-hidden="true"></div>
@@ -688,7 +831,7 @@ function openTelegramSupport(){closeMenu();const link=window.AURA_TELEGRAM_SUPPO
 async function loadCustomers(){if(!isAdmin())return;const {data,error}=await db.from('profiles').select('id,email,created_at').order('created_at',{ascending:false});if(error){$('customerSummary').innerHTML='<span class="err">'+esc(error.message)+'</span>';$('customers').innerHTML='';return;}const rows=data||[];$('customerSummary').textContent=`${rows.length} registered customer${rows.length===1?'':'s'} found.`;$('customers').innerHTML=rows.length?rows.map((c,i)=>`<div class="manageItem ${i===0?'customerNew':''}"><div><strong>${esc(c.email||'No email')}</strong><small>Registered: ${esc(new Date(c.created_at).toLocaleString())}</small></div><span class="tag">#${rows.length-i}</span></div>`).join(''):'<div class="empty">No customer accounts yet.</div>';}
 
 async function loadProducts(){const {data,error}=await db.from('products').select('*').order('created_at',{ascending:false});if(error){$('products').innerHTML='<div class="empty">'+esc(error.message)+'</div>';return}products=data||[];renderProducts()}
-function renderProducts(){const list=products.filter(p=>p.active!==false&&(cat==='All'||p.category===cat));$('products').innerHTML=list.length?list.map(p=>`<article class="card"><div class="visual">${p.image_url?`<img src="${esc(p.image_url)}" alt="">`:`<div class="fakeCard"><strong>${esc((p.category||'DIGITAL').toUpperCase())}</strong><em>AURA JINWOO</em><div class="chip"></div><small>PREMIUM DIGITAL PRODUCT</small></div>`}</div><div class="tagrow"><span class="tag">${esc(p.category||'Other')}</span><span class="stock">${Number(p.stock)>0?esc(p.stock)+' in stock':'Out of stock'}</span></div><h3>${esc(p.name)}</h3><div class="desc">${esc(p.description||'Premium digital product.')}</div><div class="meta"><span>Card Expiry<b>${esc(p.card_expiry||'—')}</b></span><span>Stock<b>${esc(p.stock)}</b></span></div><div class="buyrow"><span class="price">₹${esc(p.price)}</span><button class="buy" ${Number(p.stock)<=0?'disabled':''} onclick="openBuy(${p.id})">Buy</button></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">No products found.</div>'}
+function renderProducts(){const list=products.filter(p=>p.active!==false&&(cat==='All'||p.category===cat));$('products').innerHTML=list.length?list.map(p=>`<article class="card" data-category="${esc(p.category||'Other')}"><div class="visual">${p.image_url?`<img src="${esc(p.image_url)}" alt="">`:`<div class="fakeCard"><strong>${esc((p.category||'DIGITAL').toUpperCase())}</strong><em>AURA JINWOO</em><div class="chip"></div><small>PREMIUM DIGITAL PRODUCT</small></div>`}</div><div class="tagrow"><span class="tag">${esc(p.category||'Other')}</span><span class="stock">${Number(p.stock)>0?esc(p.stock)+' in stock':'Out of stock'}</span></div><h3>${esc(p.name)}</h3><div class="desc">${esc(p.description||'Premium digital product.')}</div><div class="meta"><span>Card Expiry<b>${esc(p.card_expiry||'—')}</b></span><span>Stock<b>${esc(p.stock)}</b></span></div><div class="buyrow"><span class="price">₹${esc(p.price)}</span><button class="buy" ${Number(p.stock)<=0?'disabled':''} onclick="openBuy(${p.id})">Buy</button></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">No products found.</div>'}
 function openBuy(id){buyProduct=products.find(p=>p.id===id);if(!buyProduct)return;modal('buyModal');$('buyTitle').textContent=buyProduct.name;$('buyPrice').textContent='Amount to pay: ₹'+buyProduct.price;$('utr').value='';$('buyMsg').textContent='';$('upiPayBtn').disabled=false}
 
 function payViaUPI(){
