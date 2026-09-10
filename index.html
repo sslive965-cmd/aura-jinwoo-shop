@@ -139,6 +139,195 @@ header{z-index:1000}
 @media(max-width:1000px){#menuBackdrop{display:none!important;pointer-events:none!important}.links.mobileOpen{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:fixed!important;top:78px!important;left:10px!important;right:10px!important;z-index:2147483647!important}.links.mobileOpen button{pointer-events:auto!important;touch-action:manipulation!important}}
 .customerNew{border-color:#39c8ff!important;box-shadow:0 0 18px #39c8ff18}
 </style>
+
+<style id="v23-3d-holographic-upgrade">
+/* V23 — visual-only upgrade. Existing HTML/JS/Supabase logic remains untouched. */
+.grid{
+  perspective:1400px;
+}
+.card{
+  transform-style:preserve-3d;
+  border:1px solid #6338d9;
+  border-radius:24px;
+  padding:14px;
+  background:
+    radial-gradient(circle at 15% 10%,#7c3cff16,transparent 34%),
+    radial-gradient(circle at 90% 85%,#27c8ff12,transparent 35%),
+    linear-gradient(145deg,#11152cf5,#050711f8 72%);
+  box-shadow:
+    0 24px 55px #000b,
+    inset 0 1px 0 #ffffff18,
+    inset 0 0 35px #6338d91a,
+    0 0 0 1px #27c8ff0d;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(120deg,#7c3cff,#39c8ff,#b33cff,#7c3cff);
+  background-size:240% 240%;
+  animation:v23BorderFlow 6s ease infinite;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  opacity:.7;
+}
+.card:after{
+  content:"";
+  position:absolute;
+  left:8%;
+  right:8%;
+  top:0;
+  height:2px;
+  border-radius:99px;
+  background:linear-gradient(90deg,transparent,#8e65ff,#39c8ff,#8e65ff,transparent);
+  box-shadow:0 0 18px #39c8ff88;
+  pointer-events:none;
+}
+.card:hover{
+  transform:translateY(-9px) rotateX(2deg) rotateY(-2deg) scale(1.012);
+  border-color:#39c8ff99;
+  box-shadow:
+    0 34px 75px #000c,
+    0 0 34px #6338d933,
+    0 0 70px #27c8ff12,
+    inset 0 1px 0 #ffffff20;
+}
+.visual{
+  position:relative;
+  height:190px;
+  border-radius:18px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle at 50% 35%,#7c3cff36,transparent 48%),
+    radial-gradient(circle at 75% 80%,#27c8ff1d,transparent 40%),
+    linear-gradient(145deg,#090b18,#111936);
+  border:1px solid #6f54d966;
+  box-shadow:inset 0 0 28px #0009,0 12px 30px #0008;
+  transform:translateZ(18px);
+}
+.visual:before{
+  content:"";
+  position:absolute;
+  inset:-35%;
+  background:linear-gradient(110deg,transparent 38%,#ffffff16 47%,#39c8ff18 51%,transparent 61%);
+  transform:translateX(-55%) rotate(8deg);
+  animation:v23Sweep 5.5s ease-in-out infinite;
+  pointer-events:none;
+}
+.visual img{
+  width:88%;
+  height:88%;
+  object-fit:cover;
+  border-radius:16px;
+  transform:rotate(-3deg) translateZ(28px);
+  border:1px solid #8aaaff88;
+  box-shadow:12px 18px 30px #000b,0 0 28px #3a7dff22;
+  transition:transform .35s,filter .35s,box-shadow .35s;
+}
+.card:hover .visual img{
+  transform:rotate(-2deg) translateY(-3px) translateZ(40px) scale(1.025);
+  filter:saturate(1.12) brightness(1.06);
+  box-shadow:15px 22px 40px #000c,0 0 36px #3a7dff3d;
+}
+.fakeCard{
+  width:82%;
+  padding:16px;
+  border-radius:17px;
+  background:
+    linear-gradient(135deg,#121b3b,#2851a0 48%,#070a16 100%);
+  border:1px solid #7ba6ff99;
+  box-shadow:14px 18px 32px #000b,0 0 30px #277cff38,inset 0 1px 0 #fff2;
+  transform:rotate(-5deg) translateZ(34px);
+  transition:transform .35s,box-shadow .35s;
+}
+.card:hover .fakeCard{
+  transform:rotate(-2deg) translateY(-4px) translateZ(48px) scale(1.025);
+  box-shadow:18px 24px 42px #000c,0 0 38px #277cff52,inset 0 1px 0 #fff3;
+}
+.tagrow,.card h3,.desc,.meta,.buyrow{
+  position:relative;
+  transform:translateZ(10px);
+}
+.tag{
+  background:#0b0820cc;
+  box-shadow:inset 0 1px 0 #fff1,0 0 14px #7c3cff18;
+}
+.meta span{
+  background:linear-gradient(145deg,#0c0e1acc,#070813dd);
+  box-shadow:inset 0 1px 0 #fff1;
+}
+.buy{
+  min-width:96px;
+  padding:12px 18px;
+  border-radius:13px;
+  background:linear-gradient(110deg,#5d27ff,#246cff 52%,#b83dff);
+  background-size:180% 100%;
+  box-shadow:0 10px 25px #4725ff55,inset 0 1px 0 #ffffff44;
+  transition:transform .2s,box-shadow .2s,background-position .3s;
+}
+.buy:hover:not(:disabled){
+  transform:translateY(-2px) scale(1.035);
+  background-position:100% 0;
+  box-shadow:0 14px 30px #4725ff70,0 0 24px #39c8ff25,inset 0 1px 0 #ffffff55;
+}
+.tools .pill{
+  position:relative;
+  min-width:120px;
+  border:1px solid #6338d9;
+  background:linear-gradient(145deg,#0d0b1dcc,#070812ee);
+  box-shadow:inset 0 1px 0 #ffffff12,0 0 18px #6338d916;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.tools .pill:hover{
+  transform:translateY(-2px);
+  border-color:#39c8ff88;
+  box-shadow:0 0 24px #39c8ff1d,inset 0 1px 0 #ffffff18;
+}
+@media(min-width:1001px){
+  .grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:22px;
+  }
+  .card{
+    min-height:525px;
+  }
+  .visual{
+    height:220px;
+  }
+  .sectionHead{
+    align-items:flex-end;
+  }
+  .tools{
+    flex-wrap:nowrap;
+  }
+}
+@media(max-width:620px){
+  .grid{gap:18px}
+  .card{border-radius:22px}
+  .visual{height:185px}
+  .tools .pill{min-width:0;flex:1;padding:10px 8px}
+}
+@keyframes v23Sweep{
+  0%,100%{transform:translateX(-55%) rotate(8deg)}
+  50%{transform:translateX(55%) rotate(8deg)}
+}
+@keyframes v23BorderFlow{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+@media(prefers-reduced-motion:reduce){
+  .card,.visual img,.fakeCard,.buy{transition:none}
+  .visual:before,.card:before{animation:none}
+}
+</style>
+
 </head>
 <body class="platform-locked">
 <div class="jinwooBg" aria-hidden="true"></div>
