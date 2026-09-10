@@ -124,7 +124,7 @@ header:after{background:linear-gradient(90deg,transparent,#168cff,#713cff,#ff235
 <section id="admin" class="section hidden"><div class="wrap"><div class="sectionHead"><div><h2>Admin Command Center</h2><p>Manage products, stock and customer orders from one place.</p></div></div><div class="adminGrid"><div class="panel"><h3>Product Manager</h3><div class="form"><div class="field"><label>Product Name *</label><input id="pname"></div><div class="field"><label>Price (₹) *</label><input id="pprice" inputmode="decimal"></div><div class="field"><label>Card Expiry Date</label><input id="pexpiry" placeholder="MM/YY"></div><div class="field"><label>Category *</label><select id="pcat"><option>Visa</option><option>MasterCard</option><option>RuPay</option><option>UPI</option><option>Gift Card</option><option>Card</option><option>Other</option></select></div><div class="field"><label>Stock Quantity *</label><input id="pstock" inputmode="numeric"></div><div class="field"><label>Image (optional)</label><div class="file"><input id="pimage" type="file" accept="image/*"></div></div><div class="field full"><label>Description</label><textarea id="pdesc"></textarea></div></div><div class="actions"><button class="cta" id="saveProductBtn" onclick="saveProduct()">Add Product</button><button class="secondary" id="cancelEditBtn" onclick="clearForm()">Clear</button></div><div id="saveMsg" class="status"></div></div><div class="panel"><h3>Quick Controls</h3><div class="notice">Products can be shown/hidden and removed from the storefront. Customers never see admin-only controls.</div><div id="manageProducts" class="manageList" style="margin-top:12px"></div></div></div><div class="panel" style="margin-top:16px"><h3>Order Verification &amp; Delivery</h3><div id="adminOrders" class="orders"></div></div><div class="panel" style="margin-top:16px"><div class="sectionHead" style="margin-bottom:10px"><div><h3 style="margin:0">Customer Accounts</h3><p style="margin:5px 0 0">All registered customer IDs/emails and account creation time.</p></div><button class="mini" type="button" onclick="loadCustomers()">Refresh</button></div><div id="customerSummary" class="notice">Loading customer accounts…</div><div id="customers" class="manageList" style="margin-top:12px"></div></div></div></section>
 </main><div class="footer">AURA JINWOO STORE • Digital Products Platform</div>
 <div id="platformModal" class="modal" aria-hidden="true"></div>
-<div id="authModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('authModal')">×</button><span class="eyebrow">ACCOUNT REQUIRED</span><h2 style="font:800 26px Orbitron">AURA JINWOO ACCESS</h2><div class="authTabs"><button class="pill active" id="loginTab" onclick="authMode('login')">Login</button><button class="pill" id="signupTab" onclick="authMode('signup')">Register</button></div><div class="authForm"><input id="authEmail" type="email" placeholder="Email address"><input id="authPass" type="password" placeholder="Password"><button class="cta" id="authAction" onclick="submitAuth()">Login</button><div id="authMsg" class="status"></div></div></div></div>
+<div id="authModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('authModal')">×</button><span class="eyebrow">ACCOUNT REQUIRED</span><h2 style="font:800 26px Orbitron">AURA JINWOO ACCESS</h2><div class="authTabs"><button class="pill active" id="loginTab" onclick="authMode('login')">Login</button><button class="pill" id="signupTab" onclick="authMode('signup')">Register</button></div><div id="authLoginPane" class="authForm"><input id="authEmail" type="email" placeholder="Email address"><input id="authPass" type="password" placeholder="Password"><button class="cta" id="authAction" onclick="submitAuth()">Login</button><button type="button" class="secondary" onclick="openForgotPassword()" style="width:100%;margin-top:2px">Forgot Password?</button><div id="authMsg" class="status"></div></div><div id="forgotPane" class="authForm hidden"><h3 style="font:800 20px Orbitron;margin:4px 0 0">Reset Password</h3><p class="muted" style="font-size:12px;line-height:1.5;margin:0">Enter the email you used to register. We’ll send a one-time verification code.</p><input id="forgotEmail" type="email" placeholder="Registered email address"><button class="cta" id="forgotSendBtn" onclick="sendResetOtp()">Send OTP</button><input id="forgotOtp" class="hidden" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Enter 6-digit OTP"><input id="forgotNewPass" class="hidden" type="password" placeholder="New password (minimum 6 characters)"><input id="forgotConfirmPass" class="hidden" type="password" placeholder="Confirm new password"><button id="forgotResetBtn" class="cta hidden" onclick="verifyOtpAndResetPassword()">Verify OTP &amp; Reset Password</button><button type="button" class="secondary" onclick="authMode('login')" style="width:100%">Back to Login</button><div id="forgotMsg" class="status"></div></div></div></div>
 <div id="buyModal" class="modal"><div class="modalBox"><button class="close" onclick="closeModal('buyModal')">×</button><span class="eyebrow">ORDER PAYMENT</span><h2 id="buyTitle" style="font:800 25px Orbitron"></h2><p id="buyPrice" class="muted"></p><img id="qr" class="qr" src="payment-qr.jpg" alt="Payment QR"><button id="upiPayBtn" class="cta upiButton" style="width:100%;margin-top:12px;background:linear-gradient(90deg,#00aaff,#7b2cff);box-shadow:0 0 24px rgba(0,170,255,.35)" onclick="payViaUPI()">📱 Pay via UPI App</button><div style="text-align:center;margin-top:8px;color:#aab4d6;font-size:13px">UPI ID: jinwoo40054@ptaxis</div><div class="notice" style="margin-top:10px">Pay using the UPI button or scan the QR. After payment, enter your UTR below. Orders are manually verified by the admin.</div><input id="utr" class="delivery" placeholder="Enter UTR / transaction reference"><button class="cta" style="width:100%;margin-top:10px" onclick="placeOrder()">Submit Order</button><div id="buyMsg" class="status"></div></div></div>
 <script>
 const db=window.supabase.createClient('https://zksdzoxmxbqqochmwxhf.supabase.co','sb_publishable_FKeym5pdwLyXioleSEiPAA_tUR2uyrD');
@@ -139,7 +139,51 @@ function enterPlatform(){const g=$('entryGate');if(g)g.classList.add('hidden');o
 function storeEntry(){openAuth();}
 function adminEntry(){openAuth();}
 function openAuth(){modal('authModal');authMode('login')}
-function authMode(m){mode=m;$('loginTab').classList.toggle('active',m==='login');$('signupTab').classList.toggle('active',m==='signup');$('authAction').textContent=m==='login'?'Login':'Register';$('authMsg').textContent=''}
+function authMode(m){mode=m;$('loginTab').classList.toggle('active',m==='login');$('signupTab').classList.toggle('active',m==='signup');$('authLoginPane').classList.remove('hidden');$('forgotPane').classList.add('hidden');$('authAction').textContent=m==='login'?'Login':'Register';$('authMsg').textContent='';$('forgotMsg').textContent=''}
+function openForgotPassword(){
+  $('authLoginPane').classList.add('hidden');
+  $('forgotPane').classList.remove('hidden');
+  $('forgotMsg').textContent='';
+  $('forgotOtp').classList.add('hidden');$('forgotNewPass').classList.add('hidden');$('forgotConfirmPass').classList.add('hidden');$('forgotResetBtn').classList.add('hidden');
+  const email=$('authEmail').value.trim().toLowerCase();
+  if(email)$('forgotEmail').value=email;
+}
+async function sendResetOtp(){
+  const email=$('forgotEmail').value.trim().toLowerCase();
+  if(!email){$('forgotMsg').innerHTML='<span class=\"err\">Please enter your registered email address.</span>';return}
+  const btn=$('forgotSendBtn');
+  btn.disabled=true;$('forgotMsg').textContent='Sending OTP…';
+  try{
+    const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false}});
+    if(error)throw error;
+    $('forgotOtp').classList.remove('hidden');$('forgotNewPass').classList.remove('hidden');$('forgotConfirmPass').classList.remove('hidden');$('forgotResetBtn').classList.remove('hidden');
+    $('forgotMsg').innerHTML='<span class=\"ok\">OTP sent. Check your email and enter the 6-digit code.</span>';
+  }catch(e){$('forgotMsg').innerHTML='<span class=\"err\">'+esc(e.message||'Could not send OTP.')+'</span>'}
+  finally{btn.disabled=false}
+}
+async function verifyOtpAndResetPassword(){
+  const email=$('forgotEmail').value.trim().toLowerCase();
+  const token=$('forgotOtp').value.trim();
+  const pass=$('forgotNewPass').value;
+  const confirm=$('forgotConfirmPass').value;
+  if(!email||!token||!pass||!confirm){$('forgotMsg').innerHTML='<span class=\"err\">Please complete all fields.</span>';return}
+  if(!/^\d{6}$/.test(token)){$('forgotMsg').innerHTML='<span class=\"err\">OTP must be 6 digits.</span>';return}
+  if(pass.length<6){$('forgotMsg').innerHTML='<span class=\"err\">New password must be at least 6 characters.</span>';return}
+  if(pass!==confirm){$('forgotMsg').innerHTML='<span class=\"err\">Passwords do not match.</span>';return}
+  const btn=$('forgotResetBtn');btn.disabled=true;$('forgotMsg').textContent='Verifying OTP…';
+  try{
+    const {data,error}=await db.auth.verifyOtp({email,token,type:'email'});
+    if(error)throw error;
+    if(!data?.session)throw new Error('OTP verification did not create a valid session.');
+    user=data.user||data.session.user||null;
+    const r=await db.auth.updateUser({password:pass});
+    if(r.error)throw r.error;
+    await ensureProfile();
+    $('forgotMsg').innerHTML='<span class=\"ok\">Password reset successful. You are now logged in.</span>';
+    setTimeout(()=>unlockStore(),700);
+  }catch(e){$('forgotMsg').innerHTML='<span class=\"err\">'+esc(e.message||'Could not reset password.')+'</span>'}
+  finally{btn.disabled=false}
+}
 function unlockStore(){
   if(!user)return;
   document.body.classList.remove('platform-locked');
