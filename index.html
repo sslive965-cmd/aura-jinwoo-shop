@@ -57,39 +57,47 @@ header{z-index:1000}
 @media(max-width:980px){
   .links.mobileOpen{
     position:fixed!important;
-    z-index:10000!important;
-    top:76px!important;
-    left:12px!important;
-    right:12px!important;
+    inset:auto 10px 10px 10px!important;
+    top:86px!important;
+    z-index:2147483647!important;
     width:auto!important;
     display:flex!important;
     flex-direction:column!important;
-    gap:4px!important;
-    padding:12px!important;
-    max-height:calc(100vh - 92px)!important;
+    align-items:stretch!important;
+    gap:8px!important;
+    padding:14px!important;
+    max-height:calc(100dvh - 98px)!important;
     overflow-y:auto!important;
-    background:#070812!important;
-    background-color:#070812!important;
+    overflow-x:hidden!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    isolation:isolate!important;
+    background:rgba(5,6,18,.99)!important;
+    background-color:#050612!important;
     opacity:1!important;
-    backdrop-filter:blur(24px)!important;
-    -webkit-backdrop-filter:blur(24px)!important;
-    border:1px solid #6540d9!important;
-    border-radius:18px!important;
-    box-shadow:0 24px 70px rgba(0,0,0,.9),0 0 35px rgba(111,60,255,.25)!important;
+    backdrop-filter:blur(28px)!important;
+    -webkit-backdrop-filter:blur(28px)!important;
+    border:2px solid #754cff!important;
+    border-radius:20px!important;
+    box-shadow:0 28px 90px rgba(0,0,0,.98),0 0 45px rgba(111,60,255,.42)!important;
   }
   .links.mobileOpen button{
-    display:block!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
     width:100%!important;
-    min-height:48px!important;
-    padding:12px 14px!important;
+    min-height:54px!important;
+    padding:14px 16px!important;
     margin:0!important;
     text-align:left!important;
-    font:600 16px/1.2 Inter,sans-serif!important;
-    color:#eeeaff!important;
-    background:rgba(17,12,39,.96)!important;
-    border:1px solid rgba(101,64,217,.35)!important;
-    border-radius:12px!important;
+    font:700 17px/1.2 Inter,sans-serif!important;
+    color:#ffffff!important;
+    background:#11102a!important;
+    border:1px solid #5137a8!important;
+    border-radius:14px!important;
     white-space:normal!important;
+    position:relative!important;
+    z-index:1!important;
   }
   .links.mobileOpen button:hover,.links.mobileOpen button.active{
     color:#fff!important;
