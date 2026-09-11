@@ -280,7 +280,7 @@ function payViaUPI(){
   if(!buyProduct){$('buyMsg').innerHTML='<span class="err">Product unavailable.</span>';return}
   const amount=Number(buyProduct.price);
   if(!Number.isFinite(amount)||amount<=0){$('buyMsg').innerHTML='<span class="err">Invalid payment amount.</span>';return}
-  const params=new URLSearchParams({pa:'40054700@axl',pn:'AURA JINWOO STORE',am:amount.toFixed(2),cu:'INR',tn:buyProduct.name.slice(0,80)});
+  const params=new URLSearchParams({pa:'jinwoo40054@ptaxis',pn:'AURA JINWOO STORE',am:amount.toFixed(2),cu:'INR',tn:buyProduct.name.slice(0,80)});
   const query=params.toString();
   const uri='upi://pay?'+query;
   const intent='intent://pay?'+query+'#Intent;scheme=upi;action=android.intent.action.VIEW;end';
