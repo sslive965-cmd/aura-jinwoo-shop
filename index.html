@@ -790,6 +790,147 @@ header:after{background:linear-gradient(90deg,transparent,#168cff,#713cff,#ff235
     font-size:13px!important;
   }
   }
+  /* FINAL CARD LAYOUT FIX */
+.productCard .cardFront{
+  position:relative!important;
+  display:block!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+
+.productCard .available{
+  position:absolute!important;
+  left:5%!important;
+  top:8%!important;
+  font-size:clamp(18px,4vw,28px)!important;
+}
+
+.productCard .cardFlipHintTop{
+  position:absolute!important;
+  right:5%!important;
+  top:10%!important;
+  font-size:clamp(10px,2.2vw,15px)!important;
+}
+
+.productCard .cardBrand{
+  position:absolute!important;
+  right:5%!important;
+  top:27%!important;
+  z-index:6!important;
+}
+
+.productCard .cardChip{
+  position:absolute!important;
+  left:5%!important;
+  top:24%!important;
+  width:14%!important;
+  height:21%!important;
+  margin:0!important;
+  z-index:5!important;
+}
+
+.productCard .cardNumber{
+  position:absolute!important;
+  left:5%!important;
+  right:5%!important;
+  top:51%!important;
+  margin:0!important;
+  font-size:clamp(13px,3vw,22px)!important;
+  letter-spacing:clamp(2px,.8vw,5px)!important;
+  white-space:nowrap!important;
+  z-index:5!important;
+}
+
+.productCard .cardMiniLabel{
+  display:none!important;
+}
+
+.productCard .cardInfoRow{
+  position:absolute!important;
+  left:5%!important;
+  right:5%!important;
+  top:70%!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:12px!important;
+  z-index:5!important;
+}
+
+.productCard .cardHolder,
+.productCard .cardBalance{
+  min-width:0!important;
+  text-align:left!important;
+}
+
+.productCard .cardHolder small,
+.productCard .cardBalance small{
+  display:block!important;
+  font-size:clamp(7px,1.7vw,11px)!important;
+  letter-spacing:1.5px!important;
+}
+
+.productCard .cardHolder b,
+.productCard .cardBalance b{
+  display:block!important;
+  margin-top:5px!important;
+  font-size:clamp(11px,2.5vw,18px)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+.productCard .cardStats{
+  position:relative!important;
+  z-index:10!important;
+}
+
+.productCard .cardBottom{
+  position:relative!important;
+  z-index:10!important;
+}
+
+@media(max-width:700px){
+  .productCard .cardFlip{
+    width:100%!important;
+    aspect-ratio:1.82!important;
+    overflow:visible!important;
+  }
+
+  .productCard .cardFace{
+    width:100%!important;
+    height:100%!important;
+    overflow:hidden!important;
+  }
+
+  .productCard .cardChip{
+    top:25%!important;
+  }
+
+  .productCard .cardNumber{
+    top:51%!important;
+  }
+
+  .productCard .cardInfoRow{
+    top:70%!important;
+  }
+}
+
+@media(max-width:390px){
+  .productCard .cardFlip{
+    aspect-ratio:1.78!important;
+  }
+
+  .productCard .available{
+    top:8%!important;
+    font-size:17px!important;
+  }
+
+  .productCard .cardFlipHintTop{
+    top:10%!important;
+    font-size:9px!important;
+  }
+}
 </style>
 </head>
 <body class="platform-locked">
