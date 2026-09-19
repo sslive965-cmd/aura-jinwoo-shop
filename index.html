@@ -367,7 +367,46 @@ header:after{background:linear-gradient(90deg,transparent,#168cff,#713cff,#ff235
   .productCard .entryFee b{font-size:32px!important}
   .productCard .cardBuy{min-height:56px!important;font-size:16px!important}
 }
+/* MOBILE CARD FIT FIX */
+@media(max-width:700px){
+  .productCard{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    overflow:visible!important;
+  }
 
+  .productCard .cardFlip,
+  .productCard .cardFace{
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+
+  .productCard .cardBottom{
+    min-width:0!important;
+  }
+
+  .productCard .cardQty{
+    min-width:0!important;
+    max-width:100%!important;
+    text-align:right!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+}
+
+@media(max-width:390px){
+  .productCard{
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  .productCard .cardQty{
+    font-size:13px!important;
+  }
+  }
 </style>
 </head>
 <body class="platform-locked">
