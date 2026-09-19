@@ -102,48 +102,6 @@ header:after{background:linear-gradient(90deg,transparent,#168cff,#713cff,#ff235
 @keyframes auragrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @media(max-width:700px){.auraVisual{height:auto!important;aspect-ratio:1024/900}.auraArt{object-position:center center}}
 @media(max-width:430px){.auraVisual{height:auto!important;aspect-ratio:1024/900}.auraArt{object-position:center center}}
-
-/* AURA JINWOO CARD DESIGN — reference-matched portrait card */
-.grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
-.card{
-  width:100%!important;max-width:430px!important;margin:0 auto!important;padding:0!important;
-  position:relative!important;border:0!important;border-radius:28px!important;background:transparent!important;
-  box-shadow:none!important;overflow:visible!important;transform:none!important;transition:none!important;
-}
-.card:before,.card:hover:before{display:none!important}
-.card:hover{transform:none!important;box-shadow:none!important}
-.cardFlip{
-  width:100%!important;aspect-ratio:3/4!important;position:relative!important;perspective:1600px!important;
-  cursor:pointer!important;border-radius:28px!important;overflow:visible!important;
-}
-.cardFlipInner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.2,1)}
-.card.is-flipped .cardFlipInner{transform:rotateY(180deg)}
-.cardFace{
-  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
-  backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;
-  overflow:hidden!important;border-radius:28px!important;border:1px solid rgba(139,86,255,.62)!important;
-  background:linear-gradient(145deg,#2b1742 0%,#160b25 46%,#080510 100%)!important;
-  box-shadow:0 22px 55px rgba(0,0,0,.62),inset 0 0 36px rgba(189,65,255,.08),0 0 22px rgba(97,51,255,.13)!important;
-  color:#f4effa!important;
-}
-.cardFace:after{content:"";position:absolute;inset:1px;border-radius:27px;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.07),transparent 18%,transparent 78%,rgba(170,60,255,.08));mix-blend-mode:screen}
-.cardFront{padding:28px 28px 22px!important;display:flex!important;flex-direction:column!important}
-.cardTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:relative;z-index:2}
-.available{font:800 22px/1 Orbitron,Inter,sans-serif!important;letter-spacing:1.5px!important;color:#21f0b5!important;text-shadow:0 0 14px rgba(33,240,181,.35)!important}
-.cardBrand{font:900 24px/1 Inter,sans-serif!important;letter-spacing:.5px!important;color:#fff!important;text-shadow:0 0 12px rgba(255,255,255,.18)!important;text-transform:none!important}
-.cardBrand.master{font-style:italic!important;font-size:21px!important;letter-spacing:1px!important}
-.cardBrand.rupay{font-size:23px!important}
-.cardFlipHintTop{position:absolute;right:28px;top:69px;z-index:4;color:#b6aebd;font:600 12px/1 Inter,sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:6px;opacity:.9}
-.cardChip{width:72px;height:56px;border-radius:13px;margin-top:32px;position:relative;z-index:2;background:linear-gradient(145deg,#fff1a5,#e8b84f 48%,#fff0a4);border:1px solid rgba(255,238,166,.85);box-shadow:0 0 18px rgba(255,209,91,.18),inset 0 0 12px rgba(105,70,0,.18)}
-.cardChip:before,.cardChip:after{content:"";position:absolute;inset:10px 17px;border:1px solid rgba(108,75,18,.45);border-radius:7px}
-.cardChip:after{inset:0 29px;border-left:1px solid rgba(108,75,18,.45);border-right:1px solid rgba(108,75,18,.45);border-radius:0}
-.cardNumber{position:relative;z-index:2;margin-top:24px;font:700 22px/1 Orbitron,Inter,sans-serif;letter-spacing:4px;color:#f4f1fa;white-space:nowrap;text-shadow:0 0 10px rgba(255,255,255,.12)}
-.cardMiniLabel{position:relative;z-index:2;margin-top:14px;color:#8e86a0;font:600 11px/1.2 Inter,sans-serif;letter-spacing:2.3px;text-transform:uppercase}
-.cardInfoRow{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:25px}
-.cardHolder,.cardBalance{min-width:0}.cardHolder small,.cardBalance small,.cardStat small,.entryFee small{display:block;color:#91879f;font:600 10px/1.2 Inter,sans-serif;letter-spacing:2px;text-transform:uppercase}.cardHolder b,.cardBalance b{display:block;margin-top:8px;color:#fff;font:800 17px/1 Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cardBalance{text-align:right}
-.cardStats{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px}.cardStat{min-width:0;padding:13px 14px;border-radius:15px;border:1px solid rgba(65,111,190,.34);background:linear-gradient(90deg,rgba(5,18,35,.72),rgba(10,9,23,.78));box-shadow:inset 0 0 18px rgba(53,115,203,.06)}.cardStat b{display:block;margin-top:7px;color:#f2eff7;font:800 12px/1.1 Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cardBottom{position:relative;z-index:2;margin-top:auto;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end}.entryFee b{display:block;margin-top:7px;color:#fff;font:900 27px/1 Orbitron,Inter,sans-serif}.cardQty{align-self:end;color:#a9a1b1;font:500 12px/1.2 Inter,sans-serif;white-space:nowrap}.cardBuy{grid-column:1/-1;width:100%;padding:16px 18px;border:1px solid rgba(205,103,255,.75);border-radius:18px;background:linear-gradient(100deg,#bf24f5 0%,#a72df0 42%,#4d59ff 100%);color:#fff;font:900 15px/1 Orbitron,Inter,sans-serif;letter-spacing:2.2px;box-shadow:0 0 28px rgba(180,52,255,.28),inset 0 0 18px rgba(255,255,255,.13);cursor:pointer}.cardBuy:disabled{opacity:.45;cursor:not-allowed}
-.flipHint{position:absolute;right:28px;bottom:26px;z-index:3;color:#9d94a8;font:600 10px/1 Inter,sans-serif;letter-spacing:1px}.flipHint:before{content:"↻";font-size:15px;vertical-align:-1px;margin-right:5px}
 .cardBack{transform:rotateY(180deg);padding:28px 0 24px!important;background:linear-gradient(145deg,#4d123f 0%,#26091f 43%,#130814 100%)!important;border-color:rgba(239,73,175,.38)!important}.cardBack .cardTop{padding:0 28px}.cardBack .available{color:#d8b5e6!important;font-size:18px!important;text-shadow:none!important}.magStripe{position:relative;z-index:2;margin-top:34px;height:84px;background:linear-gradient(180deg,#241d25,#08070b 48%,#211923);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.05);box-shadow:inset 0 0 18px rgba(0,0,0,.55)}
 .backBody{position:relative;z-index:2;padding:36px 28px 0}.cvvLabel{color:#b8aebb;font:600 13px/1 Inter,sans-serif;letter-spacing:1.5px}.cvvBox{width:160px;margin-top:10px;padding:17px 20px;border-radius:17px;background:#f4f1f5;color:#29232b;font:800 17px/1 Inter,sans-serif;letter-spacing:6px;text-align:center}.hiddenDelivery{margin-top:28px;display:flex;flex-direction:column;gap:8px;color:#d4b9d2}.hiddenDelivery b{font:800 14px/1 Inter,sans-serif;letter-spacing:1.2px}.hiddenDelivery span{font:500 11px/1.6 Inter,sans-serif;color:#aa91a9;max-width:90%}.backFlipHint{position:absolute;left:28px;bottom:27px;z-index:3;color:#b39eaf;font:600 11px/1 Inter,sans-serif;letter-spacing:1px}.backFlipHint:before{content:"↻";font-size:16px;vertical-align:-1px;margin-right:6px}.backBrand{position:absolute;right:28px;bottom:24px;z-index:3;color:#f0eaf2;font:900 25px/1 Inter,sans-serif;font-style:italic;letter-spacing:1px}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -790,53 +748,143 @@ header:after{background:linear-gradient(90deg,transparent,#168cff,#713cff,#ff235
     font-size:13px!important;
   }
   }
-  /* FINAL CARD LAYOUT FIX */
-.productCard .cardFront{
+/* AURA REFERENCE CARD — CLEAN FINAL LAYOUT */
+
+.productCard{
+  width:100%!important;
+  max-width:1050px!important;
+  margin:0 auto 30px!important;
+  padding:32px!important;
+  border:2px solid #168cff!important;
+  border-radius:42px!important;
+  background:linear-gradient(145deg,#061a38,#031027 55%,#020817)!important;
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.65),
+    0 0 35px rgba(0,125,255,.22),
+    inset 0 0 45px rgba(0,120,255,.08)!important;
+}
+
+.productCardInner{
+  width:100%!important;
+}
+
+/* CARD FLIP AREA */
+
+.productCard .cardFlip{
+  width:100%!important;
+  aspect-ratio:1.95!important;
   position:relative!important;
-  display:block!important;
-  padding:0!important;
+  perspective:1600px!important;
+  cursor:pointer!important;
+}
+
+.productCard .cardFlipInner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .65s ease;
+}
+
+.productCard.is-flipped .cardFlipInner,
+.productCard .cardFlip.is-flipped .cardFlipInner{
+  transform:rotateY(180deg);
+}
+
+.productCard .cardFace{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
   overflow:hidden!important;
+  border-radius:30px!important;
+  border:2px solid #168cff!important;
+  background:
+    linear-gradient(135deg,#0878ed 0%,#0752bd 50%,#061c52 100%)!important;
+  box-shadow:
+    0 0 30px rgba(0,126,255,.35),
+    inset 0 0 35px rgba(0,0,0,.18)!important;
+}
+
+/* MASTER CARD */
+.productCard[data-category="MasterCard"] .cardFace{
+  border-color:#8b35ff!important;
+  background:
+    linear-gradient(135deg,#35116c 0%,#40118b 45%,#12052c 100%)!important;
+}
+
+/* RUPAY */
+.productCard[data-category="RuPay"] .cardFace{
+  border-color:#24dfff!important;
+  background:
+    linear-gradient(135deg,#0877c9 0%,#0750a7 48%,#061c42 100%)!important;
+}
+
+/* FRONT */
+
+.productCard .cardFront{
+  padding:32px 38px 28px!important;
+  display:block!important;
 }
 
 .productCard .available{
   position:absolute!important;
-  left:5%!important;
-  top:8%!important;
-  font-size:clamp(18px,4vw,28px)!important;
+  left:38px!important;
+  top:32px!important;
+  font:900 28px/1 Orbitron!important;
+  letter-spacing:1px!important;
+  color:#36eaff!important;
+  text-shadow:0 0 16px rgba(55,234,255,.35)!important;
 }
 
 .productCard .cardFlipHintTop{
   position:absolute!important;
-  right:5%!important;
-  top:10%!important;
-  font-size:clamp(10px,2.2vw,15px)!important;
+  right:38px!important;
+  top:35px!important;
+  color:#bceaff!important;
+  font:600 16px/1 Inter!important;
+  letter-spacing:.5px!important;
+  z-index:5!important;
 }
 
 .productCard .cardBrand{
   position:absolute!important;
-  right:5%!important;
-  top:27%!important;
-  z-index:6!important;
+  right:38px!important;
+  top:88px!important;
+  font:900 30px/1 Inter!important;
+  color:#fff!important;
+  z-index:5!important;
+}
+
+.productCard .cardBrand.master{
+  font-style:italic!important;
 }
 
 .productCard .cardChip{
   position:absolute!important;
-  left:5%!important;
-  top:24%!important;
-  width:14%!important;
-  height:21%!important;
+  left:38px!important;
+  top:92px!important;
+  width:82px!important;
+  height:62px!important;
   margin:0!important;
+  border-radius:14px!important;
+  background:linear-gradient(145deg,#fff2a8,#e3b548 48%,#fff0a0)!important;
+  border:1px solid #fff2a5!important;
+  box-shadow:0 0 16px rgba(255,213,100,.35)!important;
   z-index:5!important;
 }
 
 .productCard .cardNumber{
   position:absolute!important;
-  left:5%!important;
-  right:5%!important;
-  top:51%!important;
+  left:38px!important;
+  right:38px!important;
+  top:178px!important;
   margin:0!important;
-  font-size:clamp(13px,3vw,22px)!important;
-  letter-spacing:clamp(2px,.8vw,5px)!important;
+  font:700 23px/1 Orbitron!important;
+  letter-spacing:6px!important;
+  color:#fff!important;
   white-space:nowrap!important;
   z-index:5!important;
 }
@@ -847,387 +895,257 @@ header:after{background:linear-gradient(90deg,transparent,#168cff,#713cff,#ff235
 
 .productCard .cardInfoRow{
   position:absolute!important;
-  left:5%!important;
-  right:5%!important;
-  top:70%!important;
+  left:38px!important;
+  right:38px!important;
+  bottom:30px!important;
   margin:0!important;
   display:grid!important;
   grid-template-columns:1fr 1fr!important;
-  gap:12px!important;
+  gap:35px!important;
   z-index:5!important;
 }
 
 .productCard .cardHolder,
 .productCard .cardBalance{
-  min-width:0!important;
   text-align:left!important;
+  min-width:0!important;
 }
 
 .productCard .cardHolder small,
 .productCard .cardBalance small{
   display:block!important;
-  font-size:clamp(7px,1.7vw,11px)!important;
-  letter-spacing:1.5px!important;
+  color:#8ec8ff!important;
+  font:600 13px/1 Inter!important;
+  letter-spacing:2px!important;
 }
 
 .productCard .cardHolder b,
 .productCard .cardBalance b{
   display:block!important;
-  margin-top:5px!important;
-  font-size:clamp(11px,2.5vw,18px)!important;
+  margin-top:8px!important;
+  color:#fff!important;
+  font:800 20px/1.1 Inter!important;
   white-space:nowrap!important;
   overflow:hidden!important;
   text-overflow:ellipsis!important;
 }
 
-.productCard .cardStats{
-  position:relative!important;
-  z-index:10!important;
-}
-
-.productCard .cardBottom{
-  position:relative!important;
-  z-index:10!important;
-}
-
-@media(max-width:700px){
-  .productCard .cardFlip{
-    width:100%!important;
-    aspect-ratio:1.82!important;
-    overflow:visible!important;
-  }
-
-  .productCard .cardFace{
-    width:100%!important;
-    height:100%!important;
-    overflow:hidden!important;
-  }
-
-  .productCard .cardChip{
-    top:25%!important;
-  }
-
-  .productCard .cardNumber{
-    top:51%!important;
-  }
-
-  .productCard .cardInfoRow{
-    top:70%!important;
-  }
-}
-
-@media(max-width:390px){
-  .productCard .cardFlip{
-    aspect-ratio:1.78!important;
-  }
-
-  .productCard .available{
-    top:8%!important;
-    font-size:17px!important;
-  }
-
-  .productCard .cardFlipHintTop{
-    top:10%!important;
-    font-size:9px!important;
-  }
-}
-@media (max-width:520px){
-  header{
-    position:relative;
-    z-index:50;
-  }
-
-  #shop{
-    padding-top:35px;
-  }
-
-  #products{
-    padding-top:10px;
-  }
-
-  .product{
-    margin-top:10px;
-  }
-}
-/* REFERENCE CARD — EXACT MOBILE PROPORTION */
-@media (max-width:700px){
-
-  .productCard{
-    width:100%!important;
-    max-width:100%!important;
-    padding:22px 16px 24px!important;
-    border-radius:34px!important;
-  }
-
-  .productCard .cardFlip{
-    width:100%!important;
-    aspect-ratio:1.82!important;
-  }
-
-  .productCard .cardStats{
-    gap:18px!important;
-    margin-top:20px!important;
-  }
-
-  .productCard .cardStat{
-    min-height:78px!important;
-    padding:16px 20px!important;
-    border-radius:38px!important;
-  }
-
-  .productCard .cardStat small{
-    font-size:17px!important;
-  }
-
-  .productCard .cardStat b{
-    font-size:18px!important;
-  }
-
-  .productCard .cardBottom{
-    margin-top:30px!important;
-    gap:14px!important;
-  }
-
-  .productCard .entryFee small{
-    font-size:15px!important;
-    letter-spacing:2px!important;
-  }
-
-  .productCard .entryFee b{
-    font-size:40px!important;
-    line-height:1!important;
-  }
-
-  .productCard .cardQty{
-    font-size:16px!important;
-    padding-bottom:4px!important;
-  }
-
-  .productCard .cardBuy{
-    min-height:70px!important;
-    border-radius:38px!important;
-    font-size:15px!important;
-    letter-spacing:2px!important;
-  }
-}
-
-@media (max-width:390px){
-
-  .productCard{
-    padding:20px 14px 22px!important;
-  }
-
-  .productCard .cardStat{
-    min-height:72px!important;
-    padding:15px 18px!important;
-  }
-
-  .productCard .cardStat small{
-    font-size:15px!important;
-  }
-
-  .productCard .cardStat b{
-    font-size:17px!important;
-  }
-
-  .productCard .entryFee b{
-    font-size:36px!important;
-  }
-
-  .productCard .cardBuy{
-    min-height:66px!important;
-  }
-}
-  /* FINAL REFERENCE MATCH — DO NOT TOUCH PAYMENT / UPI / UTR */
-.productCard{
-  width:100%!important;
-  max-width:900px!important;
-  margin:0 auto 28px!important;
-  padding:32px 28px 34px!important;
-  border:2px solid #168cff!important;
-  border-radius:40px!important;
-  box-sizing:border-box!important;
-}
-
-.productCard .cardFlip{
-  width:100%!important;
-  aspect-ratio:1.99!important;
-  border-radius:28px!important;
-}
-
-.productCard .cardFace{
-  border-radius:28px!important;
-}
-
-.productCard .cardFront{
-  padding:30px 34px 26px!important;
-}
-
-.productCard .available{
-  left:34px!important;
-  top:30px!important;
-  font-size:25px!important;
-}
-
-.productCard .cardFlipHintTop{
-  right:34px!important;
-  top:32px!important;
-  font-size:13px!important;
-}
-
-.productCard .cardBrand{
-  right:34px!important;
-  top:76px!important;
-  font-size:27px!important;
-}
-
-.productCard .cardChip{
-  left:34px!important;
-  top:82px!important;
-  width:78px!important;
-  height:58px!important;
-}
-
-.productCard .cardNumber{
-  left:34px!important;
-  right:34px!important;
-  top:165px!important;
-  font-size:22px!important;
-  letter-spacing:5px!important;
-}
-
-.productCard .cardInfoRow{
-  left:34px!important;
-  right:34px!important;
-  top:255px!important;
-}
+/* THREE INFORMATION ROWS */
 
 .productCard .cardStats{
-  display:block!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:20px!important;
   margin-top:28px!important;
 }
 
 .productCard .cardStat{
   width:100%!important;
-  min-height:64px!important;
+  min-height:78px!important;
+  padding:0 30px!important;
   display:flex!important;
   align-items:center!important;
   justify-content:space-between!important;
-  padding:15px 24px!important;
-  margin:0 0 13px!important;
-  border-radius:22px!important;
+  border:2px solid #1467d1!important;
+  border-radius:40px!important;
+  background:linear-gradient(90deg,#061b3b,#071b3b)!important;
+  box-shadow:inset 0 0 20px rgba(0,105,255,.08)!important;
 }
 
 .productCard .cardStat small{
-  font-size:17px!important;
+  color:#8dbcf2!important;
+  font:600 20px/1 Inter!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
 }
 
 .productCard .cardStat b{
-  font-size:18px!important;
+  margin:0!important;
+  color:#fff!important;
+  font:800 22px/1 Inter!important;
 }
 
+/* ENTRY FEE + QTY */
+
 .productCard .cardBottom{
-  margin-top:30px!important;
-  row-gap:17px!important;
+  margin-top:32px!important;
+  display:grid!important;
+  grid-template-columns:1fr auto!important;
+  gap:18px!important;
+  align-items:end!important;
 }
 
 .productCard .entryFee small{
-  font-size:15px!important;
+  color:#8fc5ff!important;
+  font:600 17px/1 Inter!important;
+  letter-spacing:3px!important;
 }
 
 .productCard .entryFee b{
-  font-size:40px!important;
+  display:block!important;
+  margin-top:10px!important;
+  color:#fff!important;
+  font:900 48px/1 Orbitron!important;
 }
 
 .productCard .cardQty{
-  font-size:16px!important;
+  color:#8bbfff!important;
+  font:500 20px/1 Inter!important;
+  white-space:nowrap!important;
 }
+
+/* BUY NOW */
 
 .productCard .cardBuy{
-  min-height:64px!important;
-  border-radius:32px!important;
-  font-size:18px!important;
+  grid-column:1/-1!important;
+  width:100%!important;
+  min-height:76px!important;
+  margin-top:4px!important;
+  border:2px solid #36dcff!important;
+  border-radius:40px!important;
+  background:linear-gradient(100deg,#087cff,#176dff 48%,#28dfff)!important;
+  color:#fff!important;
+  font:900 22px/1 Orbitron!important;
+  letter-spacing:3px!important;
+  box-shadow:0 0 30px rgba(0,160,255,.4)!important;
 }
 
-/* MOBILE */
+/* MASTER BUY BUTTON */
+.productCard[data-category="MasterCard"] .cardBuy{
+  background:linear-gradient(100deg,#bd24f5,#713cff,#4d59ff)!important;
+}
+
+/* BACK */
+
+.productCard .cardBack{
+  transform:rotateY(180deg)!important;
+  padding:0!important;
+  background:linear-gradient(145deg,#0878ed,#06469f,#031636)!important;
+}
+
+.productCard .cardBack .magStripe{
+  margin-top:70px!important;
+  height:70px!important;
+}
+
+.productCard .cardBack .backBody{
+  left:38px!important;
+  right:38px!important;
+  top:50%!important;
+}
+
+.productCard .cardBack .backFlipHint{
+  left:38px!important;
+  bottom:30px!important;
+}
+
+.productCard .cardBack .backBrand{
+  right:38px!important;
+  bottom:27px!important;
+}
+
+/* MOBILE — SAME REFERENCE PROPORTIONS */
+
 @media(max-width:700px){
+
   .productCard{
-    width:calc(100% - 8px)!important;
-    max-width:none!important;
-    margin-left:auto!important;
-    margin-right:auto!important;
-    padding:28px 24px 32px!important;
+    width:100%!important;
+    max-width:560px!important;
+    padding:24px 24px 28px!important;
     border-radius:38px!important;
   }
 
   .productCard .cardFlip{
-    aspect-ratio:1.99!important;
+    aspect-ratio:1.80!important;
   }
 
   .productCard .cardFront{
-    padding:27px 28px 24px!important;
+    padding:24px 25px 22px!important;
   }
 
   .productCard .available{
-    left:28px!important;
-    top:27px!important;
-    font-size:23px!important;
+    left:25px!important;
+    top:24px!important;
+    font-size:22px!important;
   }
 
   .productCard .cardFlipHintTop{
-    right:28px!important;
-    top:29px!important;
-    font-size:12px!important;
+    right:25px!important;
+    top:27px!important;
+    font-size:11px!important;
   }
 
   .productCard .cardBrand{
-    right:28px!important;
-    top:69px!important;
-    font-size:24px!important;
+    right:25px!important;
+    top:65px!important;
+    font-size:22px!important;
   }
 
   .productCard .cardChip{
-    left:28px!important;
-    top:73px!important;
-    width:72px!important;
-    height:54px!important;
+    left:25px!important;
+    top:70px!important;
+    width:62px!important;
+    height:48px!important;
   }
 
   .productCard .cardNumber{
-    left:28px!important;
-    right:28px!important;
-    top:145px!important;
-    font-size:19px!important;
-    letter-spacing:4px!important;
+    left:25px!important;
+    right:25px!important;
+    top:137px!important;
+    font-size:16px!important;
+    letter-spacing:3.5px!important;
   }
 
   .productCard .cardInfoRow{
-    left:28px!important;
-    right:28px!important;
-    top:221px!important;
+    left:25px!important;
+    right:25px!important;
+    bottom:24px!important;
+    gap:18px!important;
+  }
+
+  .productCard .cardHolder small,
+  .productCard .cardBalance small{
+    font-size:9px!important;
+    letter-spacing:1.5px!important;
   }
 
   .productCard .cardHolder b,
   .productCard .cardBalance b{
-    font-size:16px!important;
+    font-size:14px!important;
+    margin-top:5px!important;
+  }
+
+  .productCard .cardStats{
+    gap:18px!important;
+    margin-top:25px!important;
   }
 
   .productCard .cardStat{
-    min-height:58px!important;
-    padding:14px 20px!important;
-    margin-bottom:11px!important;
+    min-height:64px!important;
+    padding:0 20px!important;
+    border-radius:34px!important;
   }
 
   .productCard .cardStat small{
-    font-size:15px!important;
-  }
-
-  .productCard .cardStat b{
     font-size:16px!important;
   }
 
+  .productCard .cardStat b{
+    font-size:17px!important;
+  }
+
+  .productCard .cardBottom{
+    margin-top:28px!important;
+    gap:14px!important;
+  }
+
+  .productCard .entryFee small{
+    font-size:14px!important;
+    letter-spacing:2px!important;
+  }
+
   .productCard .entryFee b{
-    font-size:37px!important;
+    font-size:38px!important;
   }
 
   .productCard .cardQty{
@@ -1235,8 +1153,96 @@ header:after{background:linear-gradient(90deg,transparent,#168cff,#713cff,#ff235
   }
 
   .productCard .cardBuy{
-    min-height:60px!important;
+    min-height:62px!important;
+    border-radius:34px!important;
     font-size:17px!important;
+    letter-spacing:2px!important;
+  }
+}
+
+@media(max-width:390px){
+
+  .productCard{
+    padding:20px 18px 24px!important;
+  }
+
+  .productCard .cardFlip{
+    aspect-ratio:1.78!important;
+  }
+
+  .productCard .cardFront{
+    padding:21px 20px 19px!important;
+  }
+
+  .productCard .available{
+    left:20px!important;
+    top:21px!important;
+    font-size:19px!important;
+  }
+
+  .productCard .cardFlipHintTop{
+    right:20px!important;
+    top:24px!important;
+    font-size:9px!important;
+  }
+
+  .productCard .cardBrand{
+    right:20px!important;
+    top:57px!important;
+    font-size:19px!important;
+  }
+
+  .productCard .cardChip{
+    left:20px!important;
+    top:62px!important;
+    width:56px!important;
+    height:43px!important;
+  }
+
+  .productCard .cardNumber{
+    left:20px!important;
+    right:20px!important;
+    top:123px!important;
+    font-size:14px!important;
+    letter-spacing:2.5px!important;
+  }
+
+  .productCard .cardInfoRow{
+    left:20px!important;
+    right:20px!important;
+    bottom:20px!important;
+    gap:12px!important;
+  }
+
+  .productCard .cardHolder b,
+  .productCard .cardBalance b{
+    font-size:12px!important;
+  }
+
+  .productCard .cardStat{
+    min-height:58px!important;
+    padding:0 17px!important;
+  }
+
+  .productCard .cardStat small{
+    font-size:14px!important;
+  }
+
+  .productCard .cardStat b{
+    font-size:15px!important;
+  }
+
+  .productCard .entryFee b{
+    font-size:34px!important;
+  }
+
+  .productCard .cardQty{
+    font-size:13px!important;
+  }
+
+  .productCard .cardBuy{
+    min-height:58px!important;
+    font-size:15px!important;
   }
   }
 </style>
